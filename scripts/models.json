@@ -1,0 +1,167 @@
+{
+	"block": {
+		"all": "$texture"
+	},
+	"block_half": {
+		"base_model": "block",
+		"size_y": 8,
+		"translate_y": -4,
+		"transparent": true
+	},
+	"block_half_upper": {
+		"base_model": "block_half",
+		"translate_y": 4
+	},
+	"block_half_top": {
+		"base_model": "block_top",
+		"size_y": 8,
+		"translate_y": -4,
+		"transparent": true
+	},
+	"block_half_top_upper": {
+		"base_model": "block_half_top",
+		"translate_y": 4
+	},
+	"block_fluid": {
+		"base_model": "block",
+		"transparent": true
+	},
+	"block_top": {
+		"base_model": "block",
+		"top": "$texture_end"
+	},
+	"block_top_bottom": {
+		"base_model": "block",
+		"top": "$texture_top",
+		"bottom": "$texture_bottom",
+		"sides": "$texture"
+	},
+	"block_ends": {
+		"base_model": "block",
+		"ends": "$texture_end",
+		"sides": "$texture"
+	},
+	"block_water": {
+		"base_model": "block",
+		"top": "$texture",
+		"bottom": null,
+		"sides": null,
+		"transparent": true
+	},
+	"block_leaves": {
+		"base_model": "block",
+		"use_biome_shading": "all",
+		"transparent": true
+	},
+	"block_front": {
+		"base_model": "block",
+		"ends": "$texture_end",
+		"side": {
+			"0": "$texture_side",
+			"1": "$texture_side",
+			"2": "$texture",
+			"3": "$texture_side"
+		}
+	},
+	"block_piston_ext": {},
+	"obj_bed_foot": {
+		"base_model": "block",
+		"top": "blocks/bed_feet_top.png",
+		"bottom": null,
+		"side": {
+			"0": null,
+			"1": "blocks/bed_feet_side.png",
+			"2": "blocks/bed_feet_end.png",
+			"3": "blocks/bed_feet_side.png"
+		}
+	},
+	"obj_bed_head": {
+		"base_model": "block",
+		"top": "blocks/bed_head_top.png",
+		"bottom": null,
+		"side": {
+			"0": "blocks/bed_head_end.png",
+			"1": "blocks/bed_head_side.png",
+			"2": null,
+			"3": "blocks/bed_head_side.png"
+		}
+	},
+	"obj_enchanting_table": {
+		"base_model": "block_top_bottom",
+		"size_y": 12,
+		"translate_y": -2,
+		"transparent": true
+	},
+	"obj_end_frame": {
+		"base_model": "block_top_bottom",
+		"size_y": 12,
+		"translate_y": -2,
+		"transparent": true
+	},
+	"stairs": {
+		"all": "$texture",
+		"size_y": 8,
+		"translate_y": -4,
+		"transparent": true
+	},
+	"stairs_upper": {
+		"base_model": "stairs",
+		"translate_y": 4,
+		"size_x": 8,
+		"translate_x": -4
+	},
+	"obj_cobblestonewall": {},
+	"obj_flowerpot": {},
+	"obj_anvil": {},
+	"obj_chest": {},
+	"obj_hopper": {},
+	"obj_endrod": {},
+	"obj_cake": {
+		"base_model": "block_top_bottom",
+		"size_y": 8,
+		"translate_y": -4,
+		"transparent": true
+	},
+	"obj_torch": {},
+	"obj_sign": {},
+	"obj_comparator": {},
+	"obj_repeater": {},
+	"obj_cactus": {
+		"base_model": "block_top_bottom",
+		"shrink_x": 1,
+		"transparent": true
+	},
+	"panel": {
+		"base_model": "block",
+		"size_x": 0,
+		"translate_x": 7,
+		"transparent": true
+	},
+	"panel_cross": {
+		"base_model": "block_ends",
+		"ends": null,
+		"rotate_y": 45,
+		"shrink_x": 8,
+		"transparent": true
+	},
+	"panel_2x_plant": {
+		"base_model": "panel_cross",
+		"lower_panel": "$texture",
+		"upper_panel": "$texture_top"
+	},
+	"panel_2x_grass": {
+		"base_model": "panel_2x_plant",
+		"use_biome_shading": "all"
+	},
+	"glass_pane": {
+		"base_model": "block",
+		"size_x": 2,
+		"transparent": true
+	},
+	"plate": {
+		"base_model": "block",
+		"size_y": 0,
+		"translate_y": -7,
+		"transparent": true
+	}
+}

@@ -1,0 +1,267 @@
+{
+  "default": {
+    "name": "Hills",
+    "temp": 0.5,
+    "humidity": 0.5
+  },
+  "0": {
+    "name": "Ocean",
+    "temp": 0.5,
+    "humidity": 0.5
+  },
+  "1": {
+    "name": "Plains",
+    "temp": 0.8,
+    "humidity": 0.40
+  },
+  "2": {
+    "name": "Desert",
+    "temp": 2.0,
+    "humidity": 0.0
+  },
+  "3": {
+    "name": "Extreme Hills",
+    "temp": 0.2,
+    "humidity": 0.30
+  },
+  "4": {
+    "name": "Forest",
+    "temp": 0.7,
+    "humidity": 0.80
+  },
+  "5": {
+    "name": "Taiga",
+    "temp": 0.25,
+    "humidity": 0.80
+  },
+  "6": {
+    "name": "Swampland",
+    "temp": 0.8,
+    "humidity": 0.90
+  },
+  "7": {
+    "name": "River",
+    "temp": 0.5,
+    "humidity": 0.50
+  },
+  "8": {
+    "name": "Hell",
+    "temp": 2.0,
+    "humidity": 0.0
+  },
+  "9": {
+    "name": "The End",
+    "temp": 0.5,
+    "humidity": 0.50
+  },
+  "10": {
+    "name": "Frozen Ocean",
+    "temp": 0.2,
+    "humidity": 0.50
+  },
+  "11": {
+    "name": "Frozen River",
+    "temp": 0.0,
+    "humidity": 0.50
+  },
+  "12": {
+    "name": "Ice Plains",
+    "temp": 0.0,
+    "humidity": 0.50
+  },
+  "14": {
+    "name": "Mushroom Island",
+    "temp": 0.9,
+    "humidity": 1.00
+  },
+  "15": {
+    "name": "Mushroom Island Shore",
+    "temp": 0.9,
+    "humidity": 1.00
+  },
+  "16": {
+    "name": "Beach",
+    "temp": 0.8,
+    "humidity": 0.40
+  },
+  "20": {
+    "name": "Extreme Hills Edge",
+    "temp": 0.2,
+    "humidity": 0.30
+  },
+  "21": {
+    "name": "Jungle",
+    "temp": 0.95,
+    "humidity": 0.90
+  },
+  "23": {
+    "name": "Jungle Edge",
+    "temp": 0.95,
+    "humidity": 0.85
+  },
+  "24": {
+    "name": "Deep Ocean",
+    "temp": 0.5,
+    "humidity": 0.5
+  },
+  "25": {
+    "name": "Stone Beach",
+    "temp": 0.2,
+    "humidity": 0.40
+  },
+  "26": {
+    "name": "Cold Beach",
+    "temp": 0.5,
+    "humidity": 0.40
+  },
+  "27": {
+    "name": "Birch Forest",
+    "temp": 0.6,
+    "humidity": 0.80
+  },
+  "29": {
+    "name": "Roofed Forest",
+    "temp": 0.7,
+    "humidity": 0.80
+  },
+  "30": {
+    "name": "Cold Taiga",
+    "temp": -0.5,
+    "humidity": 0.80
+  },
+  "32": {
+    "name": "Mega Taiga",
+    "temp": 0.3,
+    "humidity": 0.80
+  },
+  "34": {
+    "name": "Extreme Hills+",
+    "temp": 0.2,
+    "humidity": 0.30
+  },
+  "35": {
+    "name": "Savanna",
+    "temp": 1.2,
+    "humidity": 0.0
+  },
+  "36": {
+    "name": "Plateau",
+    "temp": 2.0,
+    "humidity": 0.0
+  },
+  "37": {
+    "name": "Mesa",
+    "temp": 2.0,
+    "humidity": 0.0
+  },
+  "38": {
+    "name": "Mesa Plateau F",
+    "temp": 2.0,
+    "humidity": 0.0
+  },
+  "39": {
+    "name": "Plateau",
+    "temp": 2.0,
+    "humidity": 0.0
+  },
+  "128": {
+    "name": "Plains M",
+    "temp": 0.8,
+    "humidity": 0.40
+  },
+  "129": {
+    "name": "Sunflower Plains",
+    "temp": 0.8,
+    "humidity": 0.40
+  },
+  "130": {
+    "name": "Desert M",
+    "temp": 2.0,
+    "humidity": 0.0
+  },
+  "131": {
+    "name": "Extreme Hills M",
+    "temp": 0.2,
+    "humidity": 0.30
+  },
+  "132": {
+    "name": "Flower Forest",
+    "temp": 0.7,
+    "humidity": 0.80
+  },
+  "133": {
+    "name": "Taiga M",
+    "temp": 0.25,
+    "humidity": 0.80
+  },
+  "134": {
+    "name": "Swampland M",
+    "temp": 0.8,
+    "humidity": 0.95
+  },
+  "140": {
+    "name": "Ice Plains Spikes",
+    "temp": 0.0,
+    "humidity": 0.50
+  },
+  "149": {
+    "name": "Jungle M",
+    "temp": 0.95,
+    "humidity": 0.90
+  },
+  "151": {
+    "name": "Jungle Edge M",
+    "temp": 0.95,
+    "humidity": 0.85
+  },
+  "155": {
+    "name": "Birch Forest M",
+    "temp": 0.6,
+    "humidity": 0.80
+  },
+  "157": {
+    "name": "Roofed Forest M",
+    "temp": 0.6,
+    "humidity": 0.80
+  },
+  "158": {
+    "name": "Cold Taiga M",
+    "temp": -0.5,
+    "humidity": 0.80
+  },
+  "160": {
+    "name": "Mega Spruce Taiga",
+    "temp": 0.25,
+    "humidity": 0.80
+  },
+  "162": {
+    "name": "Extreme Hills+ M",
+    "temp": 0.2,
+    "humidity": 0.30
+  },
+  "163": {
+    "name": "Savanna M",
+    "temp": 1.2,
+    "humidity": 0.0
+  },
+  "164": {
+    "name": "Plateau M",
+    "temp": 2.0,
+    "humidity": 0.0
+  },
+  "165": {
+    "name": "Mesa (Bryce)",
+    "temp": 2.0,
+    "humidity": 0.0
+  },
+  "166": {
+    "name": "Mesa Plateau F M",
+    "temp": 2.0,
+    "humidity": 0.0
+  },
+  "167": {
+    "name": "Plateau",
+    "temp": 2.0,
+    "humidity": 0.0
+  }
+}

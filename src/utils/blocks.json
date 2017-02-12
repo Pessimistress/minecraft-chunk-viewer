@@ -1,0 +1,2276 @@
+{
+  "0:0": {
+    "name": "Air",
+    "opaque": true
+  },
+  "1:0": {
+    "name": "Stone",
+    "opaque": true
+  },
+  "1:1": {
+    "name": "Granite",
+    "opaque": true
+  },
+  "1:2": {
+    "name": "Polished Granite",
+    "opaque": true
+  },
+  "1:3": {
+    "name": "Diorite",
+    "opaque": true
+  },
+  "1:4": {
+    "name": "Polished Diorite",
+    "opaque": true
+  },
+  "1:5": {
+    "name": "Andesite",
+    "opaque": true
+  },
+  "1:6": {
+    "name": "Polished Andesite",
+    "opaque": true
+  },
+  "2:0": {
+    "name": "Grass Block",
+    "opaque": true
+  },
+  "2:1": {
+    "name": "Grass Block",
+    "opaque": true
+  },
+  "3:0": {
+    "name": "Dirt",
+    "opaque": true
+  },
+  "3:1": {
+    "name": "Coarse Dirt",
+    "opaque": true
+  },
+  "3:2": {
+    "name": "Podzol",
+    "opaque": true
+  },
+  "4:0": {
+    "name": "Cobblestone",
+    "opaque": true
+  },
+  "5:0": {
+    "name": "Oak Wood Planks",
+    "opaque": true
+  },
+  "5:1": {
+    "name": "Spruce Wood Planks",
+    "opaque": true
+  },
+  "5:2": {
+    "name": "Birch Wood Planks",
+    "opaque": true
+  },
+  "5:3": {
+    "name": "Jungle Wood Planks",
+    "opaque": true
+  },
+  "5:4": {
+    "name": "Acacia Wood Planks",
+    "opaque": true
+  },
+  "5:5": {
+    "name": "Dark Oak Wood Planks",
+    "opaque": true
+  },
+  "6:0": {
+    "name": "Oak Sapling"
+  },
+  "6:1": {
+    "name": "Spruce Sapling"
+  },
+  "6:2": {
+    "name": "Birch Sapling"
+  },
+  "6:3": {
+    "name": "Jungle Sapling"
+  },
+  "6:4": {
+    "name": "Acacia Sapling"
+  },
+  "6:5": {
+    "name": "Dark Oak Sapling"
+  },
+  "7:0": {
+    "name": "Bedrock",
+    "opaque": true
+  },
+  "8:0": {
+    "name": "Water"
+  },
+  "9:0": {
+    "name": "Stationary Water"
+  },
+  "9:1": {
+    "name": "Stationary Water"
+  },
+  "9:2": {
+    "name": "Stationary Water"
+  },
+  "9:3": {
+    "name": "Stationary Water"
+  },
+  "9:4": {
+    "name": "Stationary Water"
+  },
+  "9:5": {
+    "name": "Stationary Water"
+  },
+  "9:6": {
+    "name": "Stationary Water"
+  },
+  "9:7": {
+    "name": "Stationary Water"
+  },
+  "9:8": {
+    "name": "Stationary Water"
+  },
+  "9:9": {
+    "name": "Stationary Water"
+  },
+  "9:10": {
+    "name": "Stationary Water"
+  },
+  "9:11": {
+    "name": "Stationary Water"
+  },
+  "9:12": {
+    "name": "Stationary Water"
+  },
+  "9:13": {
+    "name": "Stationary Water"
+  },
+  "9:14": {
+    "name": "Stationary Water"
+  },
+  "9:15": {
+    "name": "Stationary Water"
+  },
+  "10:0": {
+    "name": "Lava"
+  },
+  "11:0": {
+    "name": "Stationary Lava",
+    "opaque": true
+  },
+  "12:0": {
+    "name": "Sand",
+    "opaque": true
+  },
+  "12:1": {
+    "name": "Red Sand",
+    "opaque": true
+  },
+  "13:0": {
+    "name": "Gravel",
+    "opaque": true
+  },
+  "14:0": {
+    "name": "Gold Ore",
+    "opaque": true
+  },
+  "15:0": {
+    "name": "Iron Ore",
+    "opaque": true
+  },
+  "16:0": {
+    "name": "Coal Ore",
+    "opaque": true
+  },
+  "17:0": {
+    "name": "Oak Wood",
+    "opaque": true
+  },
+  "17:1": {
+    "name": "Spruce Wood",
+    "opaque": true
+  },
+  "17:2": {
+    "name": "Birch Wood",
+    "opaque": true
+  },
+  "17:3": {
+    "name": "Jungle Wood",
+    "opaque": true
+  },
+  "17:4": {
+    "name": "Oak Wood",
+    "opaque": true
+  },
+  "17:5": {
+    "name": "Spruce Wood",
+    "opaque": true
+  },
+  "17:6": {
+    "name": "Birch Wood",
+    "opaque": true
+  },
+  "17:7": {
+    "name": "Jungle Wood",
+    "opaque": true
+  },
+  "17:8": {
+    "name": "Oak Wood",
+    "opaque": true
+  },
+  "17:9": {
+    "name": "Spruce Wood",
+    "opaque": true
+  },
+  "17:10": {
+    "name": "Birch Wood",
+    "opaque": true
+  },
+  "17:11": {
+    "name": "Jungle Wood",
+    "opaque": true
+  },
+  "17:12": {
+    "name": "Oak Wood",
+    "opaque": true
+  },
+  "17:13": {
+    "name": "Spruce Wood",
+    "opaque": true
+  },
+  "17:14": {
+    "name": "Birch Wood",
+    "opaque": true
+  },
+  "17:15": {
+    "name": "Jungle Wood",
+    "opaque": true
+  },
+  "18:0": {
+    "name": "Oak Leaves"
+  },
+  "18:1": {
+    "name": "Spruce Leaves"
+  },
+  "18:2": {
+    "name": "Birch Leaves"
+  },
+  "18:3": {
+    "name": "Jungle Leaves"
+  },
+  "18:4": {
+    "name": "Oak Leaves"
+  },
+  "18:5": {
+    "name": "Spruce Leaves"
+  },
+  "18:6": {
+    "name": "Birch Leaves"
+  },
+  "18:7": {
+    "name": "Jungle Leaves"
+  },
+  "18:8": {
+    "name": "Oak Leaves"
+  },
+  "18:9": {
+    "name": "Spruce Leaves"
+  },
+  "18:10": {
+    "name": "Birch Leaves"
+  },
+  "18:11": {
+    "name": "Jungle Leaves"
+  },
+  "18:12": {
+    "name": "Oak Leaves"
+  },
+  "18:13": {
+    "name": "Spruce Leaves"
+  },
+  "18:14": {
+    "name": "Birch Leaves"
+  },
+  "18:15": {
+    "name": "Jungle Leaves"
+  },
+  "19:0": {
+    "name": "Sponge",
+    "opaque": true
+  },
+  "19:1": {
+    "name": "Wet Sponge",
+    "opaque": true
+  },
+  "20:0": {
+    "name": "Glass"
+  },
+  "21:0": {
+    "name": "Lapis Lazuli Ore",
+    "opaque": true
+  },
+  "22:0": {
+    "name": "Lapis Lazuli Block",
+    "opaque": true
+  },
+  "23:0": {
+    "name": "Dispenser",
+    "opaque": true
+  },
+  "23:1": {
+    "name": "Dispenser",
+    "opaque": true
+  },
+  "23:2": {
+    "name": "Dispenser",
+    "opaque": true
+  },
+  "23:3": {
+    "name": "Dispenser",
+    "opaque": true
+  },
+  "23:4": {
+    "name": "Dispenser",
+    "opaque": true
+  },
+  "23:5": {
+    "name": "Dispenser",
+    "opaque": true
+  },
+  "24:0": {
+    "name": "Sandstone",
+    "opaque": true
+  },
+  "24:1": {
+    "name": "Chiseled Sandstone",
+    "opaque": true
+  },
+  "24:2": {
+    "name": "Smooth Sandstone",
+    "opaque": true
+  },
+  "25:0": {
+    "name": "Note Block",
+    "opaque": true
+  },
+  "26:0": {
+    "name": "Bed",
+    "opaque": true
+  },
+  "26:1": {
+    "name": "Bed",
+    "opaque": true
+  },
+  "26:2": {
+    "name": "Bed",
+    "opaque": true
+  },
+  "26:3": {
+    "name": "Bed",
+    "opaque": true
+  },
+  "26:8": {
+    "name": "Bed",
+    "opaque": true
+  },
+  "26:9": {
+    "name": "Bed",
+    "opaque": true
+  },
+  "26:10": {
+    "name": "Bed",
+    "opaque": true
+  },
+  "26:11": {
+    "name": "Bed",
+    "opaque": true
+  },
+  "27:0": {
+    "name": "Powered Rail"
+  },
+  "28:0": {
+    "name": "Detector Rail"
+  },
+  "29:0": {
+    "name": "Sticky Piston",
+    "opaque": true
+  },
+  "29:1": {
+    "name": "Sticky Piston",
+    "opaque": true
+  },
+  "29:2": {
+    "name": "Sticky Piston",
+    "opaque": true
+  },
+  "29:3": {
+    "name": "Sticky Piston",
+    "opaque": true
+  },
+  "29:4": {
+    "name": "Sticky Piston",
+    "opaque": true
+  },
+  "29:5": {
+    "name": "Sticky Piston",
+    "opaque": true
+  },
+  "30:0": {
+    "name": "Cobweb"
+  },
+  "31:0": {
+    "name": "Shrub"
+  },
+  "31:1": {
+    "name": "Tall Grass"
+  },
+  "31:2": {
+    "name": "Fern"
+  },
+  "32:0": {
+    "name": "Dead Bush"
+  },
+  "33:0": {
+    "name": "Piston"
+  },
+  "33:1": {
+    "name": "Piston"
+  },
+  "33:2": {
+    "name": "Piston"
+  },
+  "33:3": {
+    "name": "Piston"
+  },
+  "33:4": {
+    "name": "Piston"
+  },
+  "33:5": {
+    "name": "Piston"
+  },
+  "35:0": {
+    "name": "White Wool",
+    "opaque": true
+  },
+  "35:1": {
+    "name": "Orange Wool",
+    "opaque": true
+  },
+  "35:2": {
+    "name": "Magenta Wool",
+    "opaque": true
+  },
+  "35:3": {
+    "name": "Light Blue Wool",
+    "opaque": true
+  },
+  "35:4": {
+    "name": "Yellow Wool",
+    "opaque": true
+  },
+  "35:5": {
+    "name": "Lime Wool",
+    "opaque": true
+  },
+  "35:6": {
+    "name": "Pink Wool",
+    "opaque": true
+  },
+  "35:7": {
+    "name": "Gray Wool",
+    "opaque": true
+  },
+  "35:8": {
+    "name": "Light Wool",
+    "opaque": true
+  },
+  "35:9": {
+    "name": "Cyan Wool",
+    "opaque": true
+  },
+  "35:10": {
+    "name": "Purple Wool",
+    "opaque": true
+  },
+  "35:11": {
+    "name": "Blue Wool",
+    "opaque": true
+  },
+  "35:12": {
+    "name": "Brown Wool",
+    "opaque": true
+  },
+  "35:13": {
+    "name": "Green Wool",
+    "opaque": true
+  },
+  "35:14": {
+    "name": "Red Wool",
+    "opaque": true
+  },
+  "35:15": {
+    "name": "Black Wool",
+    "opaque": true
+  },
+  "37:0": {
+    "name": "Dandelion"
+  },
+  "38:0": {
+    "name": "Poppy"
+  },
+  "38:1": {
+    "name": "Blue Orchid"
+  },
+  "38:2": {
+    "name": "Allium"
+  },
+  "38:3": {
+    "name": "Azure Bluet"
+  },
+  "38:4": {
+    "name": "Red Tulip"
+  },
+  "38:5": {
+    "name": "Orange Tulip"
+  },
+  "38:6": {
+    "name": "White Tulip"
+  },
+  "38:7": {
+    "name": "Pink Tulip"
+  },
+  "38:8": {
+    "name": "Oxeye Daisy"
+  },
+  "39:0": {
+    "name": "Brown Mushroom"
+  },
+  "40:0": {
+    "name": "Red Mushroom"
+  },
+  "41:0": {
+    "name": "Block of Gold",
+    "opaque": true
+  },
+  "42:0": {
+    "name": "Block of Iron",
+    "opaque": true
+  },
+  "43:0": {
+    "name": "Double Stone Slab",
+    "opaque": true
+  },
+  "43:1": {
+    "name": "Double Sandstone Slab",
+    "opaque": true
+  },
+  "43:2": {
+    "name": "Double Wood Slab",
+    "opaque": true
+  },
+  "43:3": {
+    "name": "Double Cobblestone Slab",
+    "opaque": true
+  },
+  "43:4": {
+    "name": "Double Bricks Slab",
+    "opaque": true
+  },
+  "43:5": {
+    "name": "Double Stone Brick Slab",
+    "opaque": true
+  },
+  "43:6": {
+    "name": "Double Nether Brick Slab",
+    "opaque": true
+  },
+  "43:7": {
+    "name": "Double Quartz Slab",
+    "opaque": true
+  },
+  "43:8": {
+    "name": "Smooth Double Stone Slab",
+    "opaque": true
+  },
+  "43:9": {
+    "name": "Smooth Double Sandstone Slab",
+    "opaque": true
+  },
+  "43:15": {
+    "name": "Tile Double Quartz Slab",
+    "opaque": true
+  },
+  "44:0": {
+    "name": "Stone Slab"
+  },
+  "44:1": {
+    "name": "Sandstone Slab"
+  },
+  "44:2": {
+    "name": "Wood Slab"
+  },
+  "44:3": {
+    "name": "Cobblestone Slab"
+  },
+  "44:4": {
+    "name": "Bricks Slab"
+  },
+  "44:5": {
+    "name": "Stone Brick Slab"
+  },
+  "44:6": {
+    "name": "Nether Brick Slab"
+  },
+  "44:7": {
+    "name": "Quartz Slab"
+  },
+  "44:8": {
+    "name": "Upper Stone Slab"
+  },
+  "44:9": {
+    "name": "Upper Sandstone Slab"
+  },
+  "44:10": {
+    "name": "Upper Wood Slab"
+  },
+  "44:11": {
+    "name": "Upper Cobblestone Slab"
+  },
+  "44:12": {
+    "name": "Upper Bricks Slab"
+  },
+  "44:13": {
+    "name": "Upper Stone Brick Slab"
+  },
+  "44:14": {
+    "name": "Upper Nether Brick Slab"
+  },
+  "44:15": {
+    "name": "Upper Quartz Slab"
+  },
+  "45:0": {
+    "name": "Bricks",
+    "opaque": true
+  },
+  "46:0": {
+    "name": "TNT"
+  },
+  "47:0": {
+    "name": "Bookshelf",
+    "opaque": true
+  },
+  "48:0": {
+    "name": "Moss Stone",
+    "opaque": true
+  },
+  "49:0": {
+    "name": "Obsidian",
+    "opaque": true
+  },
+  "51:0": {
+    "name": "Fire"
+  },
+  "52:0": {
+    "name": "Monster Spawner",
+    "opaque": true
+  },
+  "53:0": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "53:1": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "53:2": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "53:3": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "53:4": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "53:5": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "53:6": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "53:7": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "53:8": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "53:9": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "53:10": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "53:11": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "53:12": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "53:13": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "53:14": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "53:15": {
+    "name": "Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "55:0": {
+    "name": "Redstone Wire"
+  },
+  "56:0": {
+    "name": "Diamond Ore",
+    "opaque": true
+  },
+  "57:0": {
+    "name": "Block of Diamond",
+    "opaque": true
+  },
+  "58:0": {
+    "name": "Crafting Table",
+    "opaque": true
+  },
+  "59:0": {
+    "name": "Wheat"
+  },
+  "59:1": {
+    "name": "Wheat"
+  },
+  "59:2": {
+    "name": "Wheat"
+  },
+  "59:3": {
+    "name": "Wheat"
+  },
+  "59:4": {
+    "name": "Wheat"
+  },
+  "59:5": {
+    "name": "Wheat"
+  },
+  "59:6": {
+    "name": "Wheat"
+  },
+  "59:7": {
+    "name": "Wheat"
+  },
+  "60:0": {
+    "name": "Farmland",
+    "opaque": true
+  },
+  "61:0": {
+    "name": "Furnace",
+    "opaque": true
+  },
+  "64:0": {
+    "name": "Oak Door"
+  },
+  "64:1": {
+    "name": "Oak Door"
+  },
+  "64:2": {
+    "name": "Oak Door"
+  },
+  "64:3": {
+    "name": "Oak Door"
+  },
+  "64:8": {
+    "name": "Oak Door"
+  },
+  "64:9": {
+    "name": "Oak Door"
+  },
+  "64:10": {
+    "name": "Oak Door"
+  },
+  "64:11": {
+    "name": "Oak Door"
+  },
+  "65:0": {
+    "name": "Ladder"
+  },
+  "65:2": {
+    "name": "Ladder"
+  },
+  "65:3": {
+    "name": "Ladder"
+  },
+  "65:4": {
+    "name": "Ladder"
+  },
+  "65:5": {
+    "name": "Ladder"
+  },
+  "66:0": {
+    "name": "Rail"
+  },
+  "67:0": {
+    "name": "Cobblestone Stairs",
+    "model": "stairs"
+  },
+  "67:1": {
+    "name": "Cobblestone Stairs",
+    "model": "stairs"
+  },
+  "67:2": {
+    "name": "Cobblestone Stairs",
+    "model": "stairs"
+  },
+  "67:3": {
+    "name": "Cobblestone Stairs",
+    "model": "stairs"
+  },
+  "67:4": {
+    "name": "Cobblestone Stairs",
+    "model": "stairs"
+  },
+  "67:5": {
+    "name": "Cobblestone Stairs",
+    "model": "stairs"
+  },
+  "67:6": {
+    "name": "Cobblestone Stairs",
+    "model": "stairs"
+  },
+  "67:7": {
+    "name": "Cobblestone Stairs",
+    "model": "stairs"
+  },
+  "71:0": {
+    "name": "Iron Door"
+  },
+  "71:1": {
+    "name": "Iron Door"
+  },
+  "71:2": {
+    "name": "Iron Door"
+  },
+  "71:3": {
+    "name": "Iron Door"
+  },
+  "71:8": {
+    "name": "Iron Door"
+  },
+  "71:9": {
+    "name": "Iron Door"
+  },
+  "71:10": {
+    "name": "Iron Door"
+  },
+  "71:11": {
+    "name": "Iron Door"
+  },
+  "73:0": {
+    "name": "Redstone Ore"
+  },
+  "74:0": {
+    "name": "Glowing Redstone Ore",
+    "opaque": true
+  },
+  "78:0": {
+    "name": "Snow Layers"
+  },
+  "78:1": {
+    "name": "Snow Layers"
+  },
+  "78:2": {
+    "name": "Snow Layers"
+  },
+  "78:3": {
+    "name": "Snow Layers"
+  },
+  "78:4": {
+    "name": "Snow Layers"
+  },
+  "78:5": {
+    "name": "Snow Layers"
+  },
+  "78:6": {
+    "name": "Snow Layers"
+  },
+  "78:7": {
+    "name": "Snow Layers"
+  },
+  "78:8": {
+    "name": "Snow Layers"
+  },
+  "79:0": {
+    "name": "Ice"
+  },
+  "80:0": {
+    "name": "Snow",
+    "opaque": true
+  },
+  "81:0": {
+    "name": "Cactus"
+  },
+  "82:0": {
+    "name": "White Hardened Clay",
+    "opaque": true
+  },
+  "82:1": {
+    "name": "Orange Hardened Clay",
+    "opaque": true
+  },
+  "82:2": {
+    "name": "Magenta Hardened Clay",
+    "opaque": true
+  },
+  "82:3": {
+    "name": "Light Blue Hardened Clay",
+    "opaque": true
+  },
+  "82:4": {
+    "name": "Yellow Hardened Clay",
+    "opaque": true
+  },
+  "82:5": {
+    "name": "Lime Hardened Clay",
+    "opaque": true
+  },
+  "82:6": {
+    "name": "Pink Hardened Clay",
+    "opaque": true
+  },
+  "82:7": {
+    "name": "Gray Hardened Clay",
+    "opaque": true
+  },
+  "82:8": {
+    "name": "Light Hardened Clay",
+    "opaque": true
+  },
+  "82:9": {
+    "name": "Cyan Hardened Clay",
+    "opaque": true
+  },
+  "82:10": {
+    "name": "Purple Hardened Clay",
+    "opaque": true
+  },
+  "82:11": {
+    "name": "Blue Hardened Clay",
+    "opaque": true
+  },
+  "82:12": {
+    "name": "Brown Hardened Clay",
+    "opaque": true
+  },
+  "82:13": {
+    "name": "Green Hardened Clay",
+    "opaque": true
+  },
+  "82:14": {
+    "name": "Red Hardened Clay",
+    "opaque": true
+  },
+  "82:15": {
+    "name": "Black Hardened Clay",
+    "opaque": true
+  },
+  "83:0": {
+    "name": "Sugar Cane"
+  },
+  "84:0": {
+    "name": "Jukebox",
+    "opaque": true
+  },
+  "86:0": {
+    "name": "Pumpkin",
+    "opaque": true
+  },
+  "87:0": {
+    "name": "Netherrack",
+    "opaque": true
+  },
+  "88:0": {
+    "name": "Soul Sand",
+    "opaque": true
+  },
+  "89:0": {
+    "name": "Glowstone"
+  },
+  "90:0": {
+    "name": "Nether Portal"
+  },
+  "91:0": {
+    "name": "Jack o'Lantern"
+  },
+  "92:0": {
+    "name": "Cake"
+  },
+  "95:0": {
+    "name": "White Stained Glass"
+  },
+  "95:1": {
+    "name": "Orange Stained Glass"
+  },
+  "95:2": {
+    "name": "Magenta Stained Glass"
+  },
+  "95:3": {
+    "name": "Light Blue Stained Glass"
+  },
+  "95:4": {
+    "name": "Yellow Stained Glass"
+  },
+  "95:5": {
+    "name": "Lime Stained Glass"
+  },
+  "95:6": {
+    "name": "Pink Stained Glass"
+  },
+  "95:7": {
+    "name": "Gray Stained Glass"
+  },
+  "95:8": {
+    "name": "Light Gray Stained Glass"
+  },
+  "95:9": {
+    "name": "Cyan Stained Glass"
+  },
+  "95:10": {
+    "name": "Purple Stained Glass"
+  },
+  "95:11": {
+    "name": "Blue Stained Glass"
+  },
+  "95:12": {
+    "name": "Brown Stained Glass"
+  },
+  "95:13": {
+    "name": "Green Stained Glass"
+  },
+  "95:14": {
+    "name": "Red Stained Glass"
+  },
+  "95:15": {
+    "name": "Black Stained Glass"
+  },
+  "96:0": {
+    "name": "Trapdoor"
+  },
+  "97:0": {
+    "name": "Monster Egg"
+  },
+  "98:0": {
+    "name": "Stone Bricks",
+    "opaque": true
+  },
+  "99:0": {
+    "name": "Brown Mushroom ",
+    "opaque": true
+  },
+  "100:0": {
+    "name": "Red Mushroom ",
+    "opaque": true
+  },
+  "101:0": {
+    "name": "Iron Bars",
+    "opaque": true
+  },
+  "102:0": {
+    "name": "Glass Pane"
+  },
+  "103:0": {
+    "name": "Melon",
+    "opaque": true
+  },
+  "104:0": {
+    "name": "Pumpkin Stem"
+  },
+  "104:1": {
+    "name": "Pumpkin Stem"
+  },
+  "104:2": {
+    "name": "Pumpkin Stem"
+  },
+  "104:3": {
+    "name": "Pumpkin Stem"
+  },
+  "104:4": {
+    "name": "Pumpkin Stem"
+  },
+  "104:5": {
+    "name": "Pumpkin Stem"
+  },
+  "104:6": {
+    "name": "Pumpkin Stem"
+  },
+  "104:7": {
+    "name": "Pumpkin Stem"
+  },
+  "105:0": {
+    "name": "Melon Stem"
+  },
+  "105:1": {
+    "name": "Melon Stem"
+  },
+  "105:2": {
+    "name": "Melon Stem"
+  },
+  "105:3": {
+    "name": "Melon Stem"
+  },
+  "105:4": {
+    "name": "Melon Stem"
+  },
+  "105:5": {
+    "name": "Melon Stem"
+  },
+  "105:6": {
+    "name": "Melon Stem"
+  },
+  "105:7": {
+    "name": "Melon Stem"
+  },
+  "106:0": {
+    "name": "Vines"
+  },
+  "106:1": {
+    "name": "Vines"
+  },
+  "106:2": {
+    "name": "Vines"
+  },
+  "106:4": {
+    "name": "Vines"
+  },
+  "106:8": {
+    "name": "Vines"
+  },
+  "108:0": {
+    "name": "Brick Stairs",
+    "model": "stairs"
+  },
+  "108:1": {
+    "name": "Brick Stairs",
+    "model": "stairs"
+  },
+  "108:2": {
+    "name": "Brick Stairs",
+    "model": "stairs"
+  },
+  "108:3": {
+    "name": "Brick Stairs",
+    "model": "stairs"
+  },
+  "108:4": {
+    "name": "Brick Stairs",
+    "model": "stairs"
+  },
+  "108:5": {
+    "name": "Brick Stairs",
+    "model": "stairs"
+  },
+  "108:6": {
+    "name": "Brick Stairs",
+    "model": "stairs"
+  },
+  "108:7": {
+    "name": "Brick Stairs",
+    "model": "stairs"
+  },
+  "109:0": {
+    "name": "Stone Brick Stairs",
+    "model": "stairs"
+  },
+  "109:1": {
+    "name": "Stone Brick Stairs",
+    "model": "stairs"
+  },
+  "109:2": {
+    "name": "Stone Brick Stairs",
+    "model": "stairs"
+  },
+  "109:3": {
+    "name": "Stone Brick Stairs",
+    "model": "stairs"
+  },
+  "109:4": {
+    "name": "Stone Brick Stairs",
+    "model": "stairs"
+  },
+  "109:5": {
+    "name": "Stone Brick Stairs",
+    "model": "stairs"
+  },
+  "109:6": {
+    "name": "Stone Brick Stairs",
+    "model": "stairs"
+  },
+  "109:7": {
+    "name": "Stone Brick Stairs",
+    "model": "stairs"
+  },
+  "110:0": {
+    "name": "Mycelium",
+    "opaque": true
+  },
+  "111:0": {
+    "name": "Lily Pad"
+  },
+  "112:0": {
+    "name": "Nether Brick",
+    "opaque": true
+  },
+  "114:0": {
+    "name": "Nether Brick Stairs",
+    "model": "stairs"
+  },
+  "115:0": {
+    "name": "Nether Wart"
+  },
+  "116:0": {
+    "name": "Enchantment Table"
+  },
+  "118:0": {
+    "name": "Cauldron",
+    "opaque": true
+  },
+  "119:0": {
+    "name": "End Portal"
+  },
+  "120:0": {
+    "name": "End Portal Frame"
+  },
+  "120:1": {
+    "name": "End Portal Frame"
+  },
+  "120:2": {
+    "name": "End Portal Frame"
+  },
+  "120:3": {
+    "name": "End Portal Frame"
+  },
+  "120:4": {
+    "name": "End Portal Frame"
+  },
+  "120:5": {
+    "name": "End Portal Frame"
+  },
+  "120:6": {
+    "name": "End Portal Frame"
+  },
+  "120:7": {
+    "name": "End Portal Frame"
+  },
+  "121:0": {
+    "name": "End Stone",
+    "opaque": true
+  },
+  "122:0": {
+    "name": "Dragon Egg",
+    "opaque": true
+  },
+  "123:0": {
+    "name": "Redstone Lamp",
+    "opaque": true
+  },
+  "124:0": {
+    "name": "Redstone Lamp (Active)"
+  },
+  "125:0": {
+    "name": "Double Oak Wood Slab",
+    "opaque": true
+  },
+  "125:1": {
+    "name": "Double Spruce Wood Slab",
+    "opaque": true
+  },
+  "125:2": {
+    "name": "Double Birch Wood Slab",
+    "opaque": true
+  },
+  "125:3": {
+    "name": "Double Jungle Wood Slab",
+    "opaque": true
+  },
+  "125:4": {
+    "name": "Double Acacia Wood Slab",
+    "opaque": true
+  },
+  "125:5": {
+    "name": "Double Dark Oak Wood Slab",
+    "opaque": true
+  },
+  "126:0": {
+    "name": "Oak Wood Slab"
+  },
+  "126:1": {
+    "name": "Spruce Wood Slab"
+  },
+  "126:2": {
+    "name": "Birch Wood Slab"
+  },
+  "126:3": {
+    "name": "Jungle Wood Slab"
+  },
+  "126:4": {
+    "name": "Acacia Wood Slab"
+  },
+  "126:5": {
+    "name": "Dark Oak Wood Slab"
+  },
+  "126:8": {
+    "name": "Upper Oak Wood Slab"
+  },
+  "126:9": {
+    "name": "Upper Spruce Wood Slab"
+  },
+  "126:10": {
+    "name": "Upper Birch Wood Slab"
+  },
+  "126:11": {
+    "name": "Upper Jungle Wood Slab"
+  },
+  "126:12": {
+    "name": "Upper Acacia Wood Slab"
+  },
+  "126:13": {
+    "name": "Upper Dark Oak Wood Slab"
+  },
+  "128:0": {
+    "name": "Sandstone Stairs",
+    "model": "stairs"
+  },
+  "128:1": {
+    "name": "Sandstone Stairs",
+    "model": "stairs"
+  },
+  "128:2": {
+    "name": "Sandstone Stairs",
+    "model": "stairs"
+  },
+  "128:3": {
+    "name": "Sandstone Stairs",
+    "model": "stairs"
+  },
+  "128:4": {
+    "name": "Sandstone Stairs",
+    "model": "stairs"
+  },
+  "128:5": {
+    "name": "Sandstone Stairs",
+    "model": "stairs"
+  },
+  "128:6": {
+    "name": "Sandstone Stairs",
+    "model": "stairs"
+  },
+  "128:7": {
+    "name": "Sandstone Stairs",
+    "model": "stairs"
+  },
+  "129:0": {
+    "name": "Emerald Ore",
+    "opaque": true
+  },
+  "130:0": {
+    "name": "Ender Chest",
+    "opaque": true
+  },
+  "133:0": {
+    "name": "Block of Emerald",
+    "opaque": true
+  },
+  "134:0": {
+    "name": "Spruce Wood Stairs",
+    "model": "stairs"
+  },
+  "134:1": {
+    "name": "Spruce Wood Stairs",
+    "model": "stairs"
+  },
+  "134:2": {
+    "name": "Spruce Wood Stairs",
+    "model": "stairs"
+  },
+  "134:3": {
+    "name": "Spruce Wood Stairs",
+    "model": "stairs"
+  },
+  "134:4": {
+    "name": "Spruce Wood Stairs",
+    "model": "stairs"
+  },
+  "134:5": {
+    "name": "Spruce Wood Stairs",
+    "model": "stairs"
+  },
+  "134:6": {
+    "name": "Spruce Wood Stairs",
+    "model": "stairs"
+  },
+  "134:7": {
+    "name": "Spruce Wood Stairs",
+    "model": "stairs"
+  },
+  "135:0": {
+    "name": "Birch Wood Stairs",
+    "model": "stairs"
+  },
+  "135:1": {
+    "name": "Birch Wood Stairs",
+    "model": "stairs"
+  },
+  "135:2": {
+    "name": "Birch Wood Stairs",
+    "model": "stairs"
+  },
+  "135:3": {
+    "name": "Birch Wood Stairs",
+    "model": "stairs"
+  },
+  "135:4": {
+    "name": "Birch Wood Stairs",
+    "model": "stairs"
+  },
+  "135:5": {
+    "name": "Birch Wood Stairs",
+    "model": "stairs"
+  },
+  "135:6": {
+    "name": "Birch Wood Stairs",
+    "model": "stairs"
+  },
+  "135:7": {
+    "name": "Birch Wood Stairs",
+    "model": "stairs"
+  },
+  "136:0": {
+    "name": "Jungle Wood Stairs",
+    "model": "stairs"
+  },
+  "136:1": {
+    "name": "Jungle Wood Stairs",
+    "model": "stairs"
+  },
+  "136:2": {
+    "name": "Jungle Wood Stairs",
+    "model": "stairs"
+  },
+  "136:3": {
+    "name": "Jungle Wood Stairs",
+    "model": "stairs"
+  },
+  "136:4": {
+    "name": "Jungle Wood Stairs",
+    "model": "stairs"
+  },
+  "136:5": {
+    "name": "Jungle Wood Stairs",
+    "model": "stairs"
+  },
+  "136:6": {
+    "name": "Jungle Wood Stairs",
+    "model": "stairs"
+  },
+  "136:7": {
+    "name": "Jungle Wood Stairs",
+    "model": "stairs"
+  },
+  "137:0": {
+    "name": "Command Block",
+    "opaque": true
+  },
+  "138:0": {
+    "name": "Beacon",
+    "opaque": true
+  },
+  "141:0": {
+    "name": "Carrot"
+  },
+  "141:1": {
+    "name": "Carrot"
+  },
+  "141:2": {
+    "name": "Carrot"
+  },
+  "141:3": {
+    "name": "Carrot"
+  },
+  "141:4": {
+    "name": "Carrot"
+  },
+  "141:5": {
+    "name": "Carrot"
+  },
+  "141:6": {
+    "name": "Carrot"
+  },
+  "141:7": {
+    "name": "Carrot"
+  },
+  "142:0": {
+    "name": "Potato"
+  },
+  "142:1": {
+    "name": "Potato"
+  },
+  "142:2": {
+    "name": "Potato"
+  },
+  "142:3": {
+    "name": "Potato"
+  },
+  "142:4": {
+    "name": "Potato"
+  },
+  "142:5": {
+    "name": "Potato"
+  },
+  "142:6": {
+    "name": "Potato"
+  },
+  "142:7": {
+    "name": "Potato"
+  },
+  "151:0": {
+    "name": "Daylight Sensor"
+  },
+  "152:0": {
+    "name": "Block of Redstone"
+  },
+  "153:0": {
+    "name": "Nether Quartz Ore",
+    "opaque": true
+  },
+  "155:0": {
+    "name": "Block of Quartz",
+    "opaque": true
+  },
+  "156:0": {
+    "name": "Quartz Stairs",
+    "model": "stairs"
+  },
+  "156:1": {
+    "name": "Quartz Stairs",
+    "model": "stairs"
+  },
+  "156:2": {
+    "name": "Quartz Stairs",
+    "model": "stairs"
+  },
+  "156:3": {
+    "name": "Quartz Stairs",
+    "model": "stairs"
+  },
+  "156:4": {
+    "name": "Quartz Stairs",
+    "model": "stairs"
+  },
+  "156:5": {
+    "name": "Quartz Stairs",
+    "model": "stairs"
+  },
+  "156:6": {
+    "name": "Quartz Stairs",
+    "model": "stairs"
+  },
+  "156:7": {
+    "name": "Quartz Stairs",
+    "model": "stairs"
+  },
+  "157:0": {
+    "name": "Activator Rail"
+  },
+  "158:0": {
+    "name": "Dropper",
+    "opaque": true
+  },
+  "158:1": {
+    "name": "Dropper",
+    "opaque": true
+  },
+  "158:2": {
+    "name": "Dropper",
+    "opaque": true
+  },
+  "158:3": {
+    "name": "Dropper",
+    "opaque": true
+  },
+  "158:4": {
+    "name": "Dropper",
+    "opaque": true
+  },
+  "158:5": {
+    "name": "Dropper",
+    "opaque": true
+  },
+  "159:0": {
+    "name": "White Hardened Clay",
+    "opaque": true
+  },
+  "159:1": {
+    "name": "Orange Hardened Clay",
+    "opaque": true
+  },
+  "159:2": {
+    "name": "Magenta Hardened Clay",
+    "opaque": true
+  },
+  "159:3": {
+    "name": "Light Blue Hardened Clay",
+    "opaque": true
+  },
+  "159:4": {
+    "name": "Yellow Hardened Clay",
+    "opaque": true
+  },
+  "159:5": {
+    "name": "Lime Hardened Clay",
+    "opaque": true
+  },
+  "159:6": {
+    "name": "Pink Hardened Clay",
+    "opaque": true
+  },
+  "159:7": {
+    "name": "Gray Hardened Clay",
+    "opaque": true
+  },
+  "159:8": {
+    "name": "Light Hardened Clay",
+    "opaque": true
+  },
+  "159:9": {
+    "name": "Cyan Hardened Clay",
+    "opaque": true
+  },
+  "159:10": {
+    "name": "Purple Hardened Clay",
+    "opaque": true
+  },
+  "159:11": {
+    "name": "Blue Hardened Clay",
+    "opaque": true
+  },
+  "159:12": {
+    "name": "Brown Hardened Clay",
+    "opaque": true
+  },
+  "159:13": {
+    "name": "Green Hardened Clay",
+    "opaque": true
+  },
+  "159:14": {
+    "name": "Red Hardened Clay",
+    "opaque": true
+  },
+  "159:15": {
+    "name": "Black Hardened Clay",
+    "opaque": true
+  },
+  "160:0": {
+    "name": "White Stained Glass"
+  },
+  "160:1": {
+    "name": "Orange Stained Glass"
+  },
+  "160:2": {
+    "name": "Magenta Stained Glass"
+  },
+  "160:3": {
+    "name": "Light Blue Stained Glass"
+  },
+  "160:4": {
+    "name": "Yellow Stained Glass"
+  },
+  "160:5": {
+    "name": "Lime Stained Glass"
+  },
+  "160:6": {
+    "name": "Pink Stained Glass"
+  },
+  "160:7": {
+    "name": "Gray Stained Glass"
+  },
+  "160:8": {
+    "name": "Light Gray Stained Glass"
+  },
+  "160:9": {
+    "name": "Cyan Stained Glass"
+  },
+  "160:10": {
+    "name": "Purple Stained Glass"
+  },
+  "160:11": {
+    "name": "Blue Stained Glass"
+  },
+  "160:12": {
+    "name": "Brown Stained Glass"
+  },
+  "160:13": {
+    "name": "Green Stained Glass"
+  },
+  "160:14": {
+    "name": "Red Stained Glass"
+  },
+  "160:15": {
+    "name": "Black Stained Glass"
+  },
+  "161:0": {
+    "name": "Acacia Leaves"
+  },
+  "161:1": {
+    "name": "Dark Oak Leaves"
+  },
+  "161:4": {
+    "name": "Acacia Leaves "
+  },
+  "161:5": {
+    "name": "Dark Oak Leaves "
+  },
+  "161:8": {
+    "name": "Acacia Leaves "
+  },
+  "161:9": {
+    "name": "Dark Oak Leaves "
+  },
+  "161:12": {
+    "name": "Acacia Leaves "
+  },
+  "161:13": {
+    "name": "Dark Oak Leaves "
+  },
+  "162:0": {
+    "name": "Acacia Wood",
+    "opaque": true
+  },
+  "162:1": {
+    "name": "Dark Oak Wood",
+    "opaque": true
+  },
+  "162:4": {
+    "name": "Acacia Wood",
+    "opaque": true
+  },
+  "162:5": {
+    "name": "Dark Oak Wood",
+    "opaque": true
+  },
+  "162:8": {
+    "name": "Acacia Wood",
+    "opaque": true
+  },
+  "162:9": {
+    "name": "Dark Oak Wood",
+    "opaque": true
+  },
+  "162:12": {
+    "name": "Acacia Wood",
+    "opaque": true
+  },
+  "162:13": {
+    "name": "Dark Oak Wood",
+    "opaque": true
+  },
+  "163:0": {
+    "name": "Acacia Wood Stairs",
+    "model": "stairs"
+  },
+  "163:1": {
+    "name": "Acacia Wood Stairs",
+    "model": "stairs"
+  },
+  "163:2": {
+    "name": "Acacia Wood Stairs",
+    "model": "stairs"
+  },
+  "163:3": {
+    "name": "Acacia Wood Stairs",
+    "model": "stairs"
+  },
+  "163:4": {
+    "name": "Acacia Wood Stairs",
+    "model": "stairs"
+  },
+  "163:5": {
+    "name": "Acacia Wood Stairs",
+    "model": "stairs"
+  },
+  "163:6": {
+    "name": "Acacia Wood Stairs",
+    "model": "stairs"
+  },
+  "163:7": {
+    "name": "Acacia Wood Stairs",
+    "model": "stairs"
+  },
+  "164:0": {
+    "name": "Dark Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "164:1": {
+    "name": "Dark Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "164:2": {
+    "name": "Dark Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "164:3": {
+    "name": "Dark Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "164:4": {
+    "name": "Dark Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "164:5": {
+    "name": "Dark Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "164:6": {
+    "name": "Dark Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "164:7": {
+    "name": "Dark Oak Wood Stairs",
+    "model": "stairs"
+  },
+  "165:0": {
+    "name": "Slime Block",
+    "opaque": true
+  },
+  "167:0": {
+    "name": "Iron Trapdoor"
+  },
+  "168:0": {
+    "name": "Prismarine",
+    "opaque": true
+  },
+  "169:0": {
+    "name": "Sea Lantern",
+    "opaque": true
+  },
+  "170:0": {
+    "name": "Hay Bale",
+    "opaque": true
+  },
+  "171:0": {
+    "name": "White Carpet"
+  },
+  "171:1": {
+    "name": "Orange Carpet"
+  },
+  "171:2": {
+    "name": "Magenta Carpet"
+  },
+  "171:3": {
+    "name": "Light Blue Carpet"
+  },
+  "171:4": {
+    "name": "Yellow Carpet"
+  },
+  "171:5": {
+    "name": "Lime Carpet"
+  },
+  "171:6": {
+    "name": "Pink Carpet"
+  },
+  "171:7": {
+    "name": "Gray Carpet"
+  },
+  "171:8": {
+    "name": "Light Carpet"
+  },
+  "171:9": {
+    "name": "Cyan Carpet"
+  },
+  "171:10": {
+    "name": "Purple Carpet"
+  },
+  "171:11": {
+    "name": "Blue Carpet"
+  },
+  "171:12": {
+    "name": "Brown Carpet"
+  },
+  "171:13": {
+    "name": "Green Carpet"
+  },
+  "171:14": {
+    "name": "Red Carpet"
+  },
+  "171:15": {
+    "name": "Black Carpet"
+  },
+  "172:0": {
+    "name": "White Hardened Clay",
+    "opaque": true
+  },
+  "172:1": {
+    "name": "Orange Hardened Clay",
+    "opaque": true
+  },
+  "172:2": {
+    "name": "Magenta Hardened Clay",
+    "opaque": true
+  },
+  "172:3": {
+    "name": "Light Blue Hardened Clay",
+    "opaque": true
+  },
+  "172:4": {
+    "name": "Yellow Hardened Clay",
+    "opaque": true
+  },
+  "172:5": {
+    "name": "Lime Hardened Clay",
+    "opaque": true
+  },
+  "172:6": {
+    "name": "Pink Hardened Clay",
+    "opaque": true
+  },
+  "172:7": {
+    "name": "Gray Hardened Clay",
+    "opaque": true
+  },
+  "172:8": {
+    "name": "Light Hardened Clay",
+    "opaque": true
+  },
+  "172:9": {
+    "name": "Cyan Hardened Clay",
+    "opaque": true
+  },
+  "172:10": {
+    "name": "Purple Hardened Clay",
+    "opaque": true
+  },
+  "172:11": {
+    "name": "Blue Hardened Clay",
+    "opaque": true
+  },
+  "172:12": {
+    "name": "Brown Hardened Clay",
+    "opaque": true
+  },
+  "172:13": {
+    "name": "Green Hardened Clay",
+    "opaque": true
+  },
+  "172:14": {
+    "name": "Red Hardened Clay",
+    "opaque": true
+  },
+  "172:15": {
+    "name": "Black Hardened Clay",
+    "opaque": true
+  },
+  "173:0": {
+    "name": "Block of Coal",
+    "opaque": true
+  },
+  "174:0": {
+    "name": "Packed Ice"
+  },
+  "175:0": {
+    "name": "Sunflower"
+  },
+  "175:1": {
+    "name": "Lilac"
+  },
+  "175:2": {
+    "name": "Double Tallgrass"
+  },
+  "175:3": {
+    "name": "Large Fern"
+  },
+  "175:4": {
+    "name": "Rose Bush"
+  },
+  "175:5": {
+    "name": "Paeonia"
+  },
+  "175:8": {
+    "name": "Sunflower"
+  },
+  "175:9": {
+    "name": "Lilac"
+  },
+  "175:10": {
+    "name": "Double Tallgrass"
+  },
+  "175:11": {
+    "name": "Large Fern"
+  },
+  "175:12": {
+    "name": "Rose Bush"
+  },
+  "175:13": {
+    "name": "Paeonia"
+  },
+  "178:0": {
+    "name": "Inverted Daylight Sensor"
+  },
+  "179:0": {
+    "name": "Red Sandstone",
+    "opaque": true
+  },
+  "180:0": {
+    "name": "Red Sandstone Stairs",
+    "model": "stairs"
+  },
+  "180:1": {
+    "name": "Red Sandstone Stairs",
+    "model": "stairs"
+  },
+  "180:2": {
+    "name": "Red Sandstone Stairs",
+    "model": "stairs"
+  },
+  "180:3": {
+    "name": "Red Sandstone Stairs",
+    "model": "stairs"
+  },
+  "180:4": {
+    "name": "Red Sandstone Stairs",
+    "model": "stairs"
+  },
+  "180:5": {
+    "name": "Red Sandstone Stairs",
+    "model": "stairs"
+  },
+  "180:6": {
+    "name": "Red Sandstone Stairs",
+    "model": "stairs"
+  },
+  "180:7": {
+    "name": "Red Sandstone Stairs",
+    "model": "stairs"
+  },
+  "181:0": {
+    "name": "Double Red Sandstone Slab",
+    "opaque": true
+  },
+  "182:0": {
+    "name": "Red Sandstone Slab"
+  },
+  "193:0": {
+    "name": "Spruce Door"
+  },
+  "193:1": {
+    "name": "Spruce Door"
+  },
+  "193:2": {
+    "name": "Spruce Door"
+  },
+  "193:3": {
+    "name": "Spruce Door"
+  },
+  "193:8": {
+    "name": "Spruce Door"
+  },
+  "193:9": {
+    "name": "Spruce Door"
+  },
+  "193:10": {
+    "name": "Spruce Door"
+  },
+  "193:11": {
+    "name": "Spruce Door"
+  },
+  "194:0": {
+    "name": "Birch Door"
+  },
+  "194:1": {
+    "name": "Birch Door"
+  },
+  "194:2": {
+    "name": "Birch Door"
+  },
+  "194:3": {
+    "name": "Birch Door"
+  },
+  "194:8": {
+    "name": "Birch Door"
+  },
+  "194:9": {
+    "name": "Birch Door"
+  },
+  "194:10": {
+    "name": "Birch Door"
+  },
+  "194:11": {
+    "name": "Birch Door"
+  },
+  "195:0": {
+    "name": "Jungle Door"
+  },
+  "195:1": {
+    "name": "Jungle Door"
+  },
+  "195:2": {
+    "name": "Jungle Door"
+  },
+  "195:3": {
+    "name": "Jungle Door"
+  },
+  "195:8": {
+    "name": "Jungle Door"
+  },
+  "195:9": {
+    "name": "Jungle Door"
+  },
+  "195:10": {
+    "name": "Jungle Door"
+  },
+  "195:11": {
+    "name": "Jungle Door"
+  },
+  "196:0": {
+    "name": "Acacia Door"
+  },
+  "196:1": {
+    "name": "Acacia Door"
+  },
+  "196:2": {
+    "name": "Acacia Door"
+  },
+  "196:3": {
+    "name": "Acacia Door"
+  },
+  "196:8": {
+    "name": "Acacia Door"
+  },
+  "196:9": {
+    "name": "Acacia Door"
+  },
+  "196:10": {
+    "name": "Acacia Door"
+  },
+  "196:11": {
+    "name": "Acacia Door"
+  },
+  "197:0": {
+    "name": "Dark Oak Door"
+  },
+  "197:1": {
+    "name": "Dark Oak Door"
+  },
+  "197:2": {
+    "name": "Dark Oak Door"
+  },
+  "197:3": {
+    "name": "Dark Oak Door"
+  },
+  "197:8": {
+    "name": "Dark Oak Door"
+  },
+  "197:9": {
+    "name": "Dark Oak Door"
+  },
+  "197:10": {
+    "name": "Dark Oak Door"
+  },
+  "197:11": {
+    "name": "Dark Oak Door"
+  },
+  "199:0": {
+    "name": "Chorus Plant",
+    "opaque": true
+  },
+  "200:0": {
+    "name": "Chorus Flower",
+    "opaque": true
+  },
+  "201:0": {
+    "name": "Purpur Block",
+    "opaque": true
+  },
+  "202:0": {
+    "name": "Purpur Pillar",
+    "opaque": true
+  },
+  "203:0": {
+    "name": "Purpur Stairs",
+    "model": "stairs"
+  },
+  "204:0": {
+    "name": "Purpur Double Slab",
+    "opaque": true
+  },
+  "205:0": {
+    "name": "Purpur Slab"
+  },
+  "206:0": {
+    "name": "End Stone Bricks",
+    "opaque": true
+  },
+  "207:0": {
+    "name": "Beetroot Seeds"
+  },
+  "207:1": {
+    "name": "Beetroot Seeds"
+  },
+  "207:2": {
+    "name": "Beetroot Seeds"
+  },
+  "207:3": {
+    "name": "Beetroot Seeds"
+  },
+  "208:0": {
+    "name": "Grass Path",
+    "opaque": true
+  },
+  "209:0": {
+    "name": "End Gateway",
+    "opaque": true
+  },
+  "210:0": {
+    "name": "Repeating Command Block",
+    "opaque": true
+  },
+  "211:0": {
+    "name": "Chain Command Block",
+    "opaque": true
+  },
+  "212:0": {
+    "name": "Frosted Ice"
+  },
+  "213:0": {
+    "name": "Magma Block",
+    "opaque": true
+  },
+  "214:0": {
+    "name": "Nether Wart Block",
+    "opaque": true
+  },
+  "215:0": {
+    "name": "Red Nether Brick",
+    "opaque": true
+  },
+  "216:0": {
+    "name": "Bone Block",
+    "opaque": true
+  }
+}
