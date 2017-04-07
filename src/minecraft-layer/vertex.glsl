@@ -66,23 +66,16 @@ vec3 getLightWeight(vec3 position, vec3 normal) {
   return min(ambient + diffuse1 + diffuse2, vec3(1.0));
 }
 
-mat3 getXRotationMatrix(float rad) {
-  float c = cos(rad);
-  float s = sin(rad);
-  return mat3(
-      1.0, 0.0, 0.0,
-      0.0, c, s,
-      0.0, -s, c
-  );
-}
+mat3 getXYRotationMatrix(float radX, float radY) {
+  float cx = cos(radX);
+  float sx = sin(radX);
+  float cy = cos(radY);
+  float sy = sin(radY);
 
-mat3 getYRotationMatrix(float rad) {
-  float c = cos(rad);
-  float s = sin(rad);
   return mat3(
-      c, 0.0, -s,
-      0.0, 1.0, 0.0,
-      s, 0.0, c
+    cy, 0.0, -sy,
+    sx * sy, cx, sx * cy,
+    cx * sy, -sx, cx * cy
   );
 }
 
@@ -110,7 +103,7 @@ vec4 getBiomeColor(float faceIndex) {
   vec2 coords = vec2(1.0) - instanceBlockData.yz / 255.;
   return mix(
     texture2D(biomeTexture, coords),
-    vec4(1.),
+    vec4(1.5),
     step(95., instancePositions.y)
   );
 }
@@ -136,7 +129,7 @@ void main(void) {
   vec4 transformY = formatTransform(getBlockDefAt(7.0));
 
   vec3 blockScale = vec3(transformX[0], transformY[0], 1.0);
-  mat3 blockRotation = getYRotationMatrix(transformY[1]) * getXRotationMatrix(transformX[1]);
+  mat3 blockRotation = getXYRotationMatrix(transformX[1], transformY[1]);
   vec3 blockTranslation = vec3(transformX[2], transformY[2], 0.0);
   vec3 blockShrink = vec3(transformX[3], transformY[3], transformX[3]);
 

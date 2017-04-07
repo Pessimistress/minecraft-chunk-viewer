@@ -26,11 +26,8 @@ export default class MinecraftLayer extends Layer {
       instancePickingColors: {size: 3, type: gl.UNSIGNED_BYTE, update: this.calculateInstancePickingColors},
     });
 
-    const textures = {isLoaded: false, isSent: false};
-
     this.setState({
-      model: this.getModel(gl),
-      textures
+      model: this.getModel(gl)
     });
 
     this.setUniforms({
@@ -49,10 +46,15 @@ export default class MinecraftLayer extends Layer {
       ]
     })
     .then(([blockDefsTexture, atlasTexture, biomeTexture]) => {
-      textures.isLoaded = true;
-      textures.blocks = blockDefsTexture;
-      textures.atlas = atlasTexture;
-      textures.biomes = biomeTexture;
+      this.setUniforms({
+        blockDefsTexture,
+        blockDefsTextureDim: [blockDefsTexture.width, blockDefsTexture.height],
+
+        atlasTexture,
+        atlasTextureDim: [atlasTexture.width, atlasTexture.height],
+        
+        biomeTexture
+      });
     });
   }
 
@@ -77,30 +79,12 @@ export default class MinecraftLayer extends Layer {
   }
   
   draw({uniforms}) {
-    const {textures} = this.state;
-    const {sliceY, lightSettings} = this.props;
+    const {sliceY} = this.props;
 
-    if (textures && textures.isLoaded) {
-
-      if (!textures.isSent) {
-        this.setUniforms({
-          blockDefsTexture: textures.blocks,
-          blockDefsTextureDim: [textures.blocks.width, textures.blocks.height],
-
-          atlasTexture: textures.atlas,
-          atlasTextureDim: [textures.atlas.width, textures.atlas.height],
-          
-          biomeTexture: textures.biomes
-        });
-        textures.isSent = true;
-      }
-
-      this.state.model.render({
-        ...uniforms,
-        ...lightSettings,
-        sliceY
-      });
-    }
+    this.state.model.render({
+      ...uniforms,
+      sliceY
+    });
   }
 
   calculateInstancePositions(attribute) {
