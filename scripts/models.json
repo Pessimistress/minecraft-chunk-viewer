@@ -3,7 +3,7 @@
 		"all": "$texture"
 	},
 	"block_transparent": {
-		"all": "$texture"
+		"all": "$texture",
 		"transparent": true
 	},
 	"block_top": {
