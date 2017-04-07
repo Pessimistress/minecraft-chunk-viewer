@@ -2,13 +2,14 @@ import 'babel-polyfill';
 
 import React, {Component} from 'react';
 import {render} from 'react-dom';
-import DeckGL, {Layer} from 'deck.gl';
+import DeckGL from 'deck.gl';
 import MinecraftLayer from './minecraft-layer';
-import Canvas3D from './components/canvas3d';
+import OrbitController from './components/orbit-controller';
 import Minimap from './components/minimap';
 import SummaryPanel from './components/summary-panel';
 import About from './components/about';
 
+import {Matrix4} from 'luma.gl';
 import {request} from 'd3-request';
 import {loadMCA, readChunks, REGION_FILE_PATTERN,
   getBlockNeighbors, getBlockTemperature, getBlockHumidity, isBlockOpaque} from './utils';
@@ -21,22 +22,23 @@ class Root extends Component {
     super(props);
     this.state = {
       viewport: {
-        rotateX: -Math.PI / 6,
-        rotateY: Math.PI / 4,
-        translateX: 0,
-        translateY: 0,
-        zoom: 1,
-        sliceY: 1
-      },
-      size: {
+        lookAt: [0, 0, 0],
+        rotationX: -30,
+        rotationY: 30,
+        fov: 10,
+        distance: 10,
+        minZoom: 0.1,
+        maxZoom: 1000,
         width: 500,
-        height: 500,
+        height: 500
       },
+      sliceY: 1,
       regionInfo: null,
       selection: {
         chunks: [],
         data: null
-      }
+      },
+      hoveredBlock: null
     };
 
     // load example region file
@@ -56,11 +58,9 @@ class Root extends Component {
   }
 
   _onResize = () => {
-    this.setState({
-      size: {
-        width: window.innerWidth,
-        height: window.innerHeight
-      }
+    this._onChangeViewport({
+      width: window.innerWidth,
+      height: window.innerHeight
     });
   }
 
@@ -87,9 +87,8 @@ class Root extends Component {
   }
 
   _readChunks = chunks => {
-    this.setState({
-      selection: readChunks(chunks)
-    });
+    const selection = readChunks(chunks);
+    this.setState({selection});
   }
 
   _onChangeViewport = viewport => {
@@ -99,7 +98,7 @@ class Root extends Component {
   }
 
   _onSliceY = e => {
-    this._onChangeViewport({
+    this.setState({
       sliceY: e.target.value
     });
   }
@@ -129,8 +128,8 @@ class Root extends Component {
     }
   }
 
-  _onHoverBlock = info => {
-    this.refs.infoPanel.onHover(info);
+  _onHoverBlock = ({object}) => {
+    this.setState({hoveredBlock: object});
   }
 
   _preventDefault(evt) {
@@ -145,47 +144,51 @@ class Root extends Component {
 
   render() {
 
-    const {viewport, size, selection, regionInfo} = this.state;
+    const {viewport, sliceY, selection, regionInfo, hoveredBlock} = this.state;
     const {infoPanel} = this.refs;
 
     const layers = [
       selection.data && new MinecraftLayer({
         id: 'minecraft-layer',
-        viewport,
         getNeighbors: getBlockNeighbors,
         getTemperature: getBlockTemperature,
         getBlockHumidity: getBlockHumidity,
         getIsBlockOpaque: isBlockOpaque,
         regionBounds: selection.bounds,
         data: selection.data,
+        sliceY: Math.floor(sliceY * selection.bounds.maxY + (1 - sliceY) * selection.bounds.minY),
         pickable: !viewport.isDragging,
         onHover: this._onHoverBlock
       })
     ].filter(Boolean);
 
+    const perspectiveViewport = OrbitController.getViewport(viewport);
+
     return (
       <div onDragOver={this._preventDefault} onDrop={this._handleFileDrop} >
-        <Canvas3D
+        <OrbitController
           {...viewport}
-          {...size}
-          onViewportChange={this._onChangeViewport} >
+          bounds={selection.bounds}
+          onChangeViewport={this._onChangeViewport} >
           <DeckGL
-            {...size}
+            width={viewport.width}
+            height={viewport.height}
+            viewport={perspectiveViewport}
             onWebGLInitialized={ this._onWebGLInitialized }
             layers={layers} />
-        </Canvas3D>
+        </OrbitController>
 
         <About />
 
         <input type="range" className="y-slicer"
-          min={0.01} max={1} step={0.01} value={viewport.sliceY}
+          min={0.01} max={1} step={0.01} value={sliceY}
           onChange={this._onSliceY} />
 
         <Minimap data={regionInfo} selection={selection.chunks}
-          direction={viewport.rotateY}
+          direction={viewport.rotationY}
           onSelect={this._readChunks}/>
 
-        <SummaryPanel ref="infoPanel" data={selection} />
+        <SummaryPanel data={selection} hoveredBlock={hoveredBlock} />
       </div>
     );
   }

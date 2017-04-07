@@ -29,9 +29,6 @@ attribute vec4 instanceBlockData;
 attribute float instanceVisibilities;
 attribute vec3 instancePickingColors;
 
-uniform vec2 rotation;
-uniform vec2 zoom;
-uniform vec2 translation;
 uniform float sliceY;
 
 uniform vec2 blockDefsTextureDim;
@@ -39,6 +36,7 @@ uniform vec2 atlasTextureDim;
 uniform sampler2D blockDefsTexture;
 uniform sampler2D biomeTexture;
 uniform vec3 selectedPickingColor;
+uniform float renderPickingBuffer;
 
 varying float isVisible;
 varying vec4 vColorScale;
@@ -53,15 +51,17 @@ uniform float uPointLight1Attenuation;
 uniform vec3 uPointLight2Location;
 uniform float uPointLight2Attenuation;
 
-vec3 getLightWeighting(vec3 position, vec3 normal) {
+vec3 getLightWeight(vec3 position, vec3 normal) {
+  vec3 position_viewspace = project_to_viewspace(vec4(position, 1.0)).xyz;
+  vec3 normal_viewspace = project_to_viewspace(vec4(normal, 0.0)).xyz;
 
   vec3 ambient = vec3(uAmbientLightCoefficient + instanceBlockData.w / 15.0);
 
-  vec3 light1Direction = normalize(uPointLight1Location - position);
-  vec3 light2Direction = normalize(uPointLight2Location - position);
+  vec3 light1Direction = normalize(uPointLight1Location - position_viewspace);
+  vec3 light2Direction = normalize(uPointLight2Location - position_viewspace);
 
-  float diffuse1 = uPointLight1Attenuation * max(dot(normal, light1Direction), 0.0);
-  float diffuse2 = uPointLight2Attenuation * max(dot(normal, light2Direction), 0.0);
+  float diffuse1 = uPointLight1Attenuation * max(dot(normal_viewspace, light1Direction), 0.0);
+  float diffuse2 = uPointLight2Attenuation * max(dot(normal_viewspace, light2Direction), 0.0);
 
   return min(ambient + diffuse1 + diffuse2, vec3(1.0));
 }
@@ -142,6 +142,7 @@ void main(void) {
 
   vec3 position_modelspace = instancePositions +
     blockRotation * (positions / 2. * blockScale - normals * blockShrink + blockTranslation);
+
   vec3 normal_modelspace = blockRotation * normals;
   vec2 texCoords_modelspace = texCoords * mix(
     vec2(1.0),
@@ -175,23 +176,19 @@ void main(void) {
   );
 
   // calculate position
-  mat3 transformMatrix = getXRotationMatrix(rotation.x) * getYRotationMatrix(rotation.y);
-  vec3 position_viewspace = transformMatrix * position_modelspace * vec3(-1.0, 1.0, 1.0);
-  vec3 normal_viewspace = transformMatrix * normal_modelspace;
-
-  gl_Position = vec4(
-    position_viewspace * vec3(zoom, 1.0 / 256.0) + vec3(translation, 0.),
-    1.);
+  gl_Position = project_to_clipspace(vec4(position_modelspace, 1.));
 
   // calculate colors
   vec4 biomeColor = mix(vec4(1.), getBiomeColor(faceIndex), textureSettings.z);
-  vec3 lightWeighting = getLightWeighting(position_viewspace, normal_viewspace);
+  vec3 lightWeight = getLightWeight(position_modelspace, normal_modelspace);
   float isGhosted = float(instancePositions.y > sliceY);
 
-  vColorScale = vec4(lightWeighting, mix(1.0, 0.1, isGhosted)) * biomeColor;
+  isVisible = isVisible * (1.0 - renderPickingBuffer * isGhosted);
+
+  vColorScale = vec4(lightWeight, mix(1.0, 0.1, isGhosted)) * biomeColor;
   // highlight selected
   vColorOffset = vec4(0.5, 0.5, 0.0, 0.5) * float(instancePickingColors == selectedPickingColor);
 
-  vPickingColor = vec4(instancePickingColors / 255., 1.0) * (1.0 - isGhosted);
+  vPickingColor = vec4(instancePickingColors / 255., 1.0);
 
 }

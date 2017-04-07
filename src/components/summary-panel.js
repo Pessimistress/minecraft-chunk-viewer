@@ -7,24 +7,6 @@ const fromCamelCase = name => {
 
 export default class SummaryPanel extends PureComponent {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      hoveredIndex: -1,
-      hoveredBlock: null
-    };
-  }
-
-  onHover = info => {
-    if (info.index !== this.state.hoveredIndex) {
-      this.setState({
-        hoveredIndex: info.index,
-        hoveredBlock: info.object
-      });
-    }
-  }
-
   _renderStats(stats) {
     return Object.keys(stats)
       .map(key => (
@@ -36,7 +18,7 @@ export default class SummaryPanel extends PureComponent {
   }
 
   _renderHoverInfo() {
-    const {hoveredBlock} = this.state;
+    const {hoveredBlock} = this.props;
     if (!hoveredBlock) {
       return null;
     }

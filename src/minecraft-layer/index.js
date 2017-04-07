@@ -1,17 +1,9 @@
 import {Layer, assembleShaders} from 'deck.gl';
-import {GL, Model, CubeGeometry, loadTextures} from 'luma.gl';
+import {GL, Model, CubeGeometry, loadTextures, Matrix4} from 'luma.gl';
 import {readFileSync} from 'fs';
 import {join} from 'path';
 
 const defaultProps = {
-  lightSettings: {
-    enabled: true,
-    ambientLightCoefficient: 0.1,
-    pointLight1Location: [0, 1000, -1000],
-    pointLight1Attenuation: 0.7,
-    pointLight2Location: [1000, -1000, -1000],
-    pointLight2Attenuation: 0.3
-  },
   getPosition: d => d.position,
   getBlockId: d => d.blockId,
   getBlockData: d => d.blockData,
@@ -41,6 +33,14 @@ export default class MinecraftLayer extends Layer {
       textures
     });
 
+    this.setUniforms({
+      uAmbientLightCoefficient: 0.1,
+      uPointLight1Location: [0, 10, -10],
+      uPointLight1Attenuation: 0.7,
+      uPointLight2Location: [10, -10, -10],
+      uPointLight2Attenuation: 0.3
+    })
+
     loadTextures(gl, {
       urls: [
         './data/blocks.png', 
@@ -54,37 +54,6 @@ export default class MinecraftLayer extends Layer {
       textures.atlas = atlasTexture;
       textures.biomes = biomeTexture;
     });
-  }
-
-  updateState({props, oldProps, changeFlags}) {
-    const {lightSettings, regionBounds} = props;
-    if (lightSettings !== oldProps.lightSettings) {
-      this.setUniforms({
-        uLightingEnabled: lightSettings.enabled,
-        uAmbientLightCoefficient: lightSettings.ambientLightCoefficient,
-        uPointLight1Location: lightSettings.pointLight1Location,
-        uPointLight1Attenuation: lightSettings.pointLight1Attenuation,
-        uPointLight2Location: lightSettings.pointLight2Location,
-        uPointLight2Attenuation: lightSettings.pointLight2Attenuation
-      });
-    }
-
-    if (changeFlags.dataChanged && regionBounds) {
-      const maxZoom = Math.max(
-        regionBounds.maxX - regionBounds.minX,
-        regionBounds.maxY - regionBounds.minY,
-        regionBounds.maxZ - regionBounds.minZ,
-        1
-      );
-      const regionCenter = [
-        (regionBounds.minX + regionBounds.maxX) / 2,
-        (regionBounds.minY + regionBounds.maxY) / 2,
-        (regionBounds.minZ + regionBounds.maxZ) / 2
-      ].map(Math.round);
-
-      this.setState({maxZoom, regionCenter});
-      this.state.attributeManager.invalidateAll();
-    }
   }
 
   getShaders() {
@@ -109,12 +78,9 @@ export default class MinecraftLayer extends Layer {
   
   draw({uniforms}) {
     const {textures} = this.state;
-    const {regionBounds} = this.props;
+    const {sliceY, lightSettings} = this.props;
 
-    if (regionBounds && textures && textures.isLoaded) {
-      const {maxZoom, regionCenter} = this.state;
-      const {viewport: {width, height}} = this.context;
-      const {rotateX, rotateY, translateX, translateY, zoom, sliceY} = this.props.viewport;
+    if (textures && textures.isLoaded) {
 
       if (!textures.isSent) {
         this.setUniforms({
@@ -131,25 +97,22 @@ export default class MinecraftLayer extends Layer {
 
       this.state.model.render({
         ...uniforms,
-        rotation: [rotateX, rotateY],
-        translation: [translateX, translateY],
-        zoom: [zoom / maxZoom / width * height, zoom / maxZoom],
-        sliceY: Math.floor(sliceY * (regionBounds.maxY - regionBounds.minY)) + regionBounds.minY - regionCenter[1]
+        ...lightSettings,
+        sliceY
       });
     }
   }
 
   calculateInstancePositions(attribute) {
     const {data, getPosition} = this.props;
-    const {regionCenter} = this.state;
     const {value} = attribute;
 
     let i = 0;
     for (const object of data) {
       const pos = getPosition(object);
-      value[i++] = pos[0] - regionCenter[0];
-      value[i++] = pos[1] - regionCenter[1];
-      value[i++] = pos[2] - regionCenter[2];
+      value[i++] = pos[0];
+      value[i++] = pos[1];
+      value[i++] = pos[2];
     }
   }
 

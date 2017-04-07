@@ -17,9 +17,9 @@
   "dependencies": {
     "babel-polyfill": "^6.20.0",
     "d3-request": "^1.0.3",
-    "deck.gl": "3.1.0-beta.16",
+    "deck.gl": "^4.0.0",
     "immutable": "^3.8.1",
-    "luma.gl": "3.0.0-beta6",
+    "luma.gl": "^3.0.0",
     "minecraft-region": "^0.3.1",
     "react": "^15.4.1",
     "react-dom": "^15.4.1"
