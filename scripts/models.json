@@ -46,14 +46,16 @@
 		"sides": "$texture"
 	},
 	"block_water": {
-		"base_model": "block_transparent",
+		"base_model": "block",
 		"top": "$texture",
 		"bottom": null,
-		"sides": null
+		"sides": null,
+		"transparent": true
 	},
 	"block_leaves": {
-		"base_model": "block_transparent",
-		"use_biome_shading": "all"
+		"base_model": "block",
+		"use_biome_shading": "all",
+		"transparent": true
 	},
 	"block_front": {
 		"base_model": "block",
