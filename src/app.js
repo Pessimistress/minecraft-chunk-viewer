@@ -12,7 +12,7 @@ import About from './components/about';
 import {Matrix4} from 'luma.gl';
 import {request} from 'd3-request';
 import {loadMCA, readChunks, REGION_FILE_PATTERN,
-  getBlockNeighbors, getBlockTemperature, getBlockHumidity, isBlockOpaque} from './utils';
+  getBlockNeighbors, getBlockTemperature, getBlockHumidity, isBlockOpaque} from './utils/mca-parser';
 
 const sampleFile = 'r.5.13.mca';
 
@@ -157,7 +157,7 @@ class Root extends Component {
         regionBounds: selection.bounds,
         data: selection.data,
         sliceY: Math.floor(sliceY * selection.bounds.maxY + (1 - sliceY) * selection.bounds.minY),
-        pickable: !viewport.isDragging,
+        pickable: true,
         onHover: this._onHoverBlock
       })
     ].filter(Boolean);

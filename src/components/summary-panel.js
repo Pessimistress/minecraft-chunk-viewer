@@ -1,17 +1,15 @@
 import React, {PureComponent} from 'react';
 
-const fromCamelCase = name => {
-  const words = name.match(/[A-Z]?[a-z0-9]+/g) || [];
-  return words.map(w => `${w[0].toUpperCase()}${w.slice(1)}`).join(' ');
-}
-
+/*
+ * Displays the metadata of the selected chunks and the hovered block
+ */
 export default class SummaryPanel extends PureComponent {
 
   _renderStats(stats) {
     return Object.keys(stats)
       .map(key => (
         <tr key={key}>
-          <td><b>{fromCamelCase(key)}</b></td>
+          <td><b>{key}</b></td>
           <td>{stats[key]}</td>
         </tr>
       ));
@@ -25,10 +23,10 @@ export default class SummaryPanel extends PureComponent {
     const {blockId, blockData, position, biome, block} = hoveredBlock;
 
     return this._renderStats({
-      blockName: block.name,
-      blockId: `${blockId}:${blockData}`,
-      coordinates: `X ${position[0]} Y ${position[1]} Z ${position[2]}`,
-      biome: biome.name
+      'Block Name': block.name,
+      'Block Id': `${blockId}:${blockData}`,
+      'Coordinates': `X ${position[0]} Y ${position[1]} Z ${position[2]}`,
+      'Biome': biome.name
     });
   }
 
@@ -39,20 +37,19 @@ export default class SummaryPanel extends PureComponent {
       return null;
     }
     return this._renderStats({
-      chunksLoaded: chunks.length,
-      blocksRendered: blockCount
+      'Chunks Loaded': chunks.length,
+      'Blocks Rendered': blockCount
     });
   }
 
   render() {
-    return (
-      <div className="summary-panel">
-        <table>
-          <tbody>
-            { this._renderSummary() }
-            { this._renderHoverInfo() }
-          </tbody>
-        </table>
-      </div>);
+    return (<div className="summary-panel">
+      <table>
+        <tbody>
+          { this._renderSummary() }
+          { this._renderHoverInfo() }
+        </tbody>
+      </table>
+    </div>);
   }
 }

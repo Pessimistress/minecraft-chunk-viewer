@@ -1,9 +1,12 @@
-
 import {Viewport} from 'deck.gl';
 import {mat4} from 'gl-matrix';
 
 const DEGREES_TO_RADIANS = Math.PI / 180;
 
+/*
+ * A deck.gl Viewport class used by OrbitController
+ * Adds zoom and pixel translation on top of the PerspectiveViewport
+ */
 export default class OrbitViewport extends Viewport {
   constructor({
     // viewport arguments
@@ -18,9 +21,9 @@ export default class OrbitViewport extends Viewport {
     near = 1, // Distance of near clipping plane
     far = 100, // Distance of far clipping plane
 
-    // screen space
-    translationX = 0,
-    translationY = 0,
+    // after projection
+    translationX = 0, // in pixels
+    translationY = 0, // in pixels
     zoom = 1,
 
     // automatically calculated

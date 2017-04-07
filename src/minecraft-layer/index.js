@@ -4,6 +4,9 @@ import {readFileSync} from 'fs';
 import {join} from 'path';
 
 const defaultProps = {
+  // max Y level to show
+  sliceY: 256,
+  // accessors
   getPosition: d => d.position,
   getBlockId: d => d.blockId,
   getBlockData: d => d.blockData,
@@ -139,6 +142,7 @@ export default class MinecraftLayer extends Layer {
           getIsBlockOpaque(x, y, z + 1), // S
           getIsBlockOpaque(x - 1, y, z)  // W
         ];
+        // compress Boolean[6] into a single float using binary flags
         value[i++] = neighbors.reduce((acc, n) => (acc << 1) + !n, 0);
       } else {
         value[i++] = 0b111111;

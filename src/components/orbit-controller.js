@@ -3,27 +3,34 @@ import React, {Component, PropTypes} from 'react';
 import OrbitViewport from '../utils/orbit-viewport';
 import {vec3} from 'gl-matrix';
 
-/* Utils */
+/* Math Utils */
 
-// constrain number between bounds
+// Whether number is between bounds
+function inRange(x, min, max) {
+  return x >= min && x <= max;
+}
+// Constrain number between bounds
 function clamp(x, min, max) {
-  if (x < min) {
-    return min;
+  return x < min ? min : (x > max ? max : x);
+}
+// Get ratio of x on domain
+function interp(x, domain0, domain1) {
+  if (domain0 === domain1) {
+    return x === domain0 ? 0 : Infinity;
   }
-  if (x > max) {
-    return max;
-  }
-  return x;
+  return (x - domain0) / (domain1 - domain0);
 }
 
 const ua = typeof window.navigator !== 'undefined' ?
   window.navigator.userAgent.toLowerCase() : '';
 const firefox = ua.indexOf('firefox') !== -1;
 
-/* Interaction */
-
+/*
+ * Maps mouse interaction to a deck.gl Viewport
+ */
 export default class OrbitController extends Component {
 
+  // Returns a deck.gl Viewport instance, to be used with the DeckGL component
   static getViewport({width, height, lookAt, distance, rotationX, rotationY, fov, translationX, translationY, zoom}) {
     const cameraPos = vec3.add([], lookAt, [0, 0, distance]);
     vec3.rotateX(cameraPos, cameraPos, lookAt, rotationX / 180 * Math.PI);
@@ -59,28 +66,80 @@ export default class OrbitController extends Component {
     }
   }
 
+  /* Cast a ray into the screen center and take the average of all
+   * intersections with the bounding box:
+   *
+   *                         (x=w/2)
+   *                          .
+   *                          .
+   *   (bounding box)         .
+   *           _-------------_.
+   *          | "-_           :-_
+   *         |     "-_        .  "-_
+   *        |         "-------+-----:
+   *       |.........|........C....|............. (y=h/2)
+   *      |         |         .   |
+   *     |         |          .  |
+   *    |         |           . |
+   *   |         |            .|
+   *  |         |             |                      Y
+   *   "-_     |             |.             Z       |
+   *      "-_ |             | .              "-_   |
+   *         "-------------"                    "-|_____ X
+   */
+  _getLocationAtCenter() {
+    const {width, height, bounds} = this.props;
+
+    if (!bounds) {
+      return null;
+    }
+
+    const viewport = OrbitController.getViewport(this.props);
+
+    const C0 = viewport.unproject([width / 2, height / 2, 0]);
+    const C1 = viewport.unproject([width / 2, height / 2, 1]);
+    const sum = vec3.fromValues(0, 0, 0);
+    let count = 0;
+
+    [
+      // depth at intersection with X = minX
+      interp(bounds.minX, C0[0], C1[0]),
+      // depth at intersection with X = maxX
+      interp(bounds.maxX, C0[0], C1[0]),
+      // depth at intersection with Y = minY
+      interp(bounds.minY, C0[1], C1[1]),
+      // depth at intersection with Y = maxY
+      interp(bounds.maxY, C0[1], C1[1]),
+      // depth at intersection with Z = minZ
+      interp(bounds.minZ, C0[2], C1[2]),
+      // depth at intersection with Z = maxZ
+      interp(bounds.maxZ, C0[2], C1[2])
+    ].forEach(d => {
+      // worldspace position of the intersection
+      const C = vec3.lerp([], C0, C1, d);
+      // check if position is on the bounding box
+      if (inRange(C[0], bounds.minX, bounds.maxX) &&
+          inRange(C[1], bounds.minY, bounds.maxY) &&
+          inRange(C[2], bounds.minZ, bounds.maxZ)) {
+        count++;
+        vec3.add(sum, sum, C);
+      }
+    });
+
+    return count > 0 ? vec3.scale([], sum, 1 / count) : null;
+  }
+
   _onChangeViewport(viewport) {
     this.props.onChangeViewport(viewport);
   }
 
   _onDragStart(evt) {
     const {pageX, pageY} = evt;
-    const {width, height, bounds, lookAt} = this.props;
 
     this._dragStartPos = [pageX, pageY];
-
-    if (bounds) {
-      const viewport = OrbitController.getViewport(this.props);
-
-      const pos0 = viewport.project(lookAt);
-      const pos1 = viewport.project([lookAt[0], lookAt[1] + 1, lookAt[2]]);
-
-      const dy = (height / 2 - pos0[1]) / (pos1[1] - pos0[1]);
-
-      this._dragStartCenter = [lookAt[0], clamp(lookAt[1] + dy, bounds.minY, bounds.maxY), lookAt[2]];
-    } else {
-      this._dragStartCenter = null;
-    }
+    // Rotation center should be the worldspace position at the center of the
+    // the screen. If not found, use the last one.
+    this._dragRotateCenter = this._getLocationAtCenter() || this._dragRotateCenter;
   }
 
   _onDrag(evt) {
@@ -91,36 +150,36 @@ export default class OrbitController extends Component {
       const dy = pageY - this._dragStartPos[1];
 
       if (evt.shiftKey || evt.ctrlKey || evt.altKey || evt.metaKey) {
-        // pan
+        // Pan
         this._onChangeViewport({
           translationX: translationX + dx,
           translationY: translationY - dy
         });
       } else {
-        // rotate
-        const {rotationX, rotationY, lookAt} = this.props;
+        // Rotate
+        const {rotationX, rotationY} = this.props;
         const newRotationX = clamp(rotationX - dy / height * 180, -89.999, 89.999);
         const newRotationY = (rotationY - dx / width * 180) % 360;
 
-        const viewport = OrbitController.getViewport(this.props);
-        const newViewport = OrbitController.getViewport({...this.props, rotationX: newRotationX, rotationY: newRotationY});
+        let newTranslationX = translationX;
+        let newTranslationY = translationY;
 
-        let tx = 0;
-        let ty = 0;
+        if (this._dragRotateCenter) {
+          // Keep rotation center at the center of the screen
+          const viewport = OrbitController.getViewport(this.props);
+          const newViewport = OrbitController.getViewport({...this.props, rotationX: newRotationX, rotationY: newRotationY});
+          const center = viewport.project(this._dragRotateCenter);
+          const newCenter = newViewport.project(this._dragRotateCenter);
 
-        if (this._dragStartCenter) {
-          const center = viewport.project(this._dragStartCenter);
-          const newCenter = newViewport.project(this._dragStartCenter);
-
-          tx = center[0] - newCenter[0];
-          ty = center[1] - newCenter[1];
+          newTranslationX += center[0] - newCenter[0];
+          newTranslationY -= center[1] - newCenter[1];
         }
 
         this._onChangeViewport({
           rotationX: newRotationX,
           rotationY: newRotationY,
-          translationX: translationX + tx,
-          translationY: translationY - ty
+          translationX: newTranslationX,
+          translationY: newTranslationY
         });
       }
 
@@ -130,7 +189,6 @@ export default class OrbitController extends Component {
 
   _onDragEnd() {
     this._dragStartPos = null;
-    this.props.onChangeViewport({isDragging: false});
   }
 
   _onWheel(evt) {
@@ -153,11 +211,10 @@ export default class OrbitController extends Component {
     const {pageX, pageY} = evt;
     const {zoom, minZoom, maxZoom, width, height, translationX, translationY} = this.props;
     const newZoom = clamp(zoom * Math.pow(1.01, -value), minZoom, maxZoom);
-    const deltaZoom = newZoom / zoom;
 
+    // Zoom around the pointer position
     const cx = pageX - width / 2;
     const cy = height / 2 - pageY;
-
     const newTranslationX = cx - (cx - translationX) * newZoom / zoom;
     const newTranslationY = cy - (cy - translationY) * newZoom / zoom;
 
@@ -168,7 +225,7 @@ export default class OrbitController extends Component {
     });
   }
 
-  // public API
+  // Move camera to cover the entire bounding box
   _fitBounds(bounds) {
     if (!bounds) {
       return;

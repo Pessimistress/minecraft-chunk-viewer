@@ -1,50 +1,58 @@
 import React, {PureComponent} from 'react';
-import {findChunkIndex} from '../utils';
+import {findChunkIndex} from '../utils/mca-parser';
 
+/*
+ * A component that visualizes the entire region and handles chunk selection
+ * The terrain map is rendered with the max height information of each column
+ * on a 2D canvas
+ */
 export default class Minimap extends PureComponent {
 
   constructor(props) {
     super(props);
     this.state = {
-      xIndex: -1,
-      zIndex: -1
+      hoveredX: -1,
+      hoveredZ: -1
     };
   }
 
   _onSelect = evt => {
-    const {xIndex, zIndex} = this.state;
-    if (xIndex < 0) {
+    const {hoveredX, hoveredZ} = this.state;
+    if (hoveredX < 0) {
       return;
     }
 
     if (evt.altKey || evt.shiftKey || evt.ctrlKey) {
-
+      // Multiple selection mode
       const selectedChunks = this.props.selection.slice(0);
-      const i = findChunkIndex(selectedChunks, xIndex, zIndex);
+      const i = findChunkIndex(selectedChunks, hoveredX, hoveredZ);
 
-      if (i >= 0) {
+      if (i < 0) {
+        // Add to selection
+        selectedChunks.push([hoveredX, hoveredZ]);
+      } else if (selectedChunks.length > 1) {
+        // Remove if already selected, but don't remove the last one
         selectedChunks.splice(i, 1);
-      } else {
-        selectedChunks.push([xIndex, zIndex]);
       }
       this.props.onSelect(selectedChunks);
     } else {
-      this.props.onSelect([[xIndex, zIndex]]);
+      // Single selection mode
+      this.props.onSelect([[hoveredX, hoveredZ]]);
     }
   }
 
   _onHover = evt => {
-    const {xIndex, zIndex} = this.state;
+    const {hoveredX, hoveredZ} = this.state;
     const {offsetX, offsetY} = evt.nativeEvent;
     const x = offsetX >> 4;
     const z = offsetY >> 4;
 
-    if (xIndex !== x || zIndex !== z) {
+    if (hoveredX !== x || hoveredZ !== z) {
       const {data: {availableChunks}} = this.props;
       if (findChunkIndex(availableChunks, x, z) >= 0) {
         this.setState({
-          xIndex: x,
-          zIndex: z
+          hoveredX: x,
+          hoveredZ: z
         });
       } else {
         this._onUnhover();
@@ -54,8 +62,8 @@ export default class Minimap extends PureComponent {
 
   _onUnhover = () => {
     this.setState({
-      xIndex: -1,
-      zIndex: -1
+      hoveredX: -1,
+      hoveredZ: -1
     });
   }
 
@@ -65,10 +73,10 @@ export default class Minimap extends PureComponent {
       return null;
     }
 
-    const {xIndex, zIndex} = this.state;
+    const {hoveredX, hoveredZ} = this.state;
     const hoverBoxStyle = {
-      left: `${xIndex * 16}px`,
-      top: `${zIndex * 16}px`
+      left: `${hoveredX * 16}px`,
+      top: `${hoveredZ * 16}px`
     };
 
     return (
