@@ -10,7 +10,7 @@
     "build-assets": "node scripts",
     "build-copy": "cp -r static/* dist",
     "build-script": "webpack -p",
-    "build": "npm run build-clean && npm run build-asset && npm run build-script && npm run build-copy"
+    "build": "npm run build-clean && npm run build-assets && npm run build-script && npm run build-copy"
   },
   "author": "Xiaoji Chen <cxiaoji@gmail.com>",
   "license": "MIT",

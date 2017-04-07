@@ -671,10 +671,6 @@
   "51:0": {
     "name": "Fire"
   },
-  "52:0": {
-    "name": "Monster Spawner",
-    "opaque": true
-  },
   "53:0": {
     "name": "Oak Wood Stairs",
     "model": "stairs"
