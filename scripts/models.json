@@ -2,6 +2,13 @@
 	"block": {
 		"all": "$texture"
 	},
+	"block_transparent": {
+		"transparent": true
+	},
+	"block_top": {
+		"base_model": "block",
+		"top": "$texture_end"
+	},
 	"block_half": {
 		"base_model": "block",
 		"size_y": 8,
@@ -26,10 +33,6 @@
 		"base_model": "block",
 		"transparent": true
 	},
-	"block_top": {
-		"base_model": "block",
-		"top": "$texture_end"
-	},
 	"block_top_bottom": {
 		"base_model": "block",
 		"top": "$texture_top",
@@ -42,16 +45,14 @@
 		"sides": "$texture"
 	},
 	"block_water": {
-		"base_model": "block",
+		"base_model": "block_transparent",
 		"top": "$texture",
 		"bottom": null,
-		"sides": null,
-		"transparent": true
+		"sides": null
 	},
 	"block_leaves": {
-		"base_model": "block",
-		"use_biome_shading": "all",
-		"transparent": true
+		"base_model": "block_transparent",
+		"use_biome_shading": "all"
 	},
 	"block_front": {
 		"base_model": "block",

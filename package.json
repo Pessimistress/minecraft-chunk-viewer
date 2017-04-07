@@ -7,7 +7,7 @@
     "serve": "webpack-dev-server --progress --hot --port 3000 --open",
     "start": "npm run link && npm run serve",
     "build-clean": "rm -rf dist && mkdir dist",
-    "build-asset": "node scripts",
+    "build-assets": "node scripts",
     "build-copy": "cp -r static/* dist",
     "build-script": "webpack -p",
     "build": "npm run build-clean && npm run build-asset && npm run build-script && npm run build-copy"
