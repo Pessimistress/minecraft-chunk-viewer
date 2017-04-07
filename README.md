@@ -5,7 +5,7 @@
 
 ## Preparing
 
-1. Copy or link to your Minecraft texture assests to ```./assets/textures``` under the project directory. The target minecraft asset directory should contain the following structure:
+1. Copy or link to your Minecraft texture assests to ```./assets/``` under the project directory. The target minecraft asset directory should contain the following structure:
 ```
 blockstates/
 font/
@@ -23,7 +23,7 @@ textures/
 2. Run the following commands from the project root directory, and ignore any warnings.
 ```
 npm install
-npm build-asset
+npm build-assets
 npm start
 ```
 
