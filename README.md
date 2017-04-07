@@ -23,7 +23,7 @@ textures/
 2. Run the following commands from the project root directory, and ignore any warnings.
 ```
 npm install
-npm build-assets
+npm run build-assets
 npm start
 ```
 
