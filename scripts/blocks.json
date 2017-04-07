@@ -1026,7 +1026,7 @@
 	"51": {
 		"name": "Fire",
 		"material": "minecraft:fire",
-		"model_type": "block",
+		"model_type": "panel_cross",
 		"texture": "blocks/fire_layer_0.png",
 		"option": null,
 		"transparent": true
@@ -1034,7 +1034,7 @@
 	"52": {
 		"name": "Monster Spawner",
 		"material": "minecraft:mob_spawner",
-		"model_type": "block",
+		"model_type": "block_transparent",
 		"texture": "blocks/mob_spawner.png",
 		"option": null
 	},
