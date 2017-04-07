@@ -1,5 +1,5 @@
 
-## Minecraft Chunk Viewer
+## Minecraft Chunk Viewer | [Demo](http://pessimistress.github.io/minecraft/)
 
 ![Screencast](./screencast.gif)
 
