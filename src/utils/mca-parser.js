@@ -1,6 +1,6 @@
 import minecraftRegion from 'minecraft-region';
-import blockInfos from './blocks';
-import biomeInfos from './biomes';
+import blockInfos from '../constants/blocks';
+import biomeInfos from '../constants/biomes';
 
 /*
  * Level format reference:
@@ -15,7 +15,7 @@ let selection;
 let yBuffer;
 let occupancy;
 
-export const REGION_FILE_PATTERN = /^r\.(-?\d+)\.(-?\d+)\.mca$/;
+export const REGION_FILE_PATTERN = /\.mca$/;
 
 /*
  * load a Minecraft region file

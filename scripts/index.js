@@ -10,7 +10,7 @@ var utils = require('./utils'),
     renderBlockDefs = require('./render-block-defs');
 
 var outputImageDir = '../static/data';
-var outputJsonDir = '../src/utils';
+var outputJsonDir = '../src/constants';
 
 var input_models = utils.readJSON('./models.json');
 var input_blocks = utils.readJSON('./blocks.json');
