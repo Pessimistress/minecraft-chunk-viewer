@@ -1,6 +1,7 @@
 /* global window */
 import React, {Component, PropTypes} from 'react';
 import OrbitViewport from '../utils/orbit-viewport';
+import Hammer from 'react-hammerjs';
 import {vec3} from 'gl-matrix';
 
 /* Math Utils */
@@ -24,6 +25,17 @@ function interp(x, domain0, domain1) {
 const ua = typeof window.navigator !== 'undefined' ?
   window.navigator.userAgent.toLowerCase() : '';
 const firefox = ua.indexOf('firefox') !== -1;
+
+const hammerOptions = {
+  recognizers: {
+    tap: { enable: false },
+    doubletap: { enable: false },
+    swipe: { enable: false },
+    press: { enable: false },
+    pinch: { enable: true },
+    pan: {threshold: 0, direction: 30}
+  }
+};
 
 /*
  * Maps mouse interaction to a deck.gl Viewport
@@ -52,11 +64,12 @@ export default class OrbitController extends Component {
 
   constructor(props) {
     super(props);
-    this._dragStartPos = null;
+    this._dragStartCenter = null;
 
-    this._onDragStart = this._onDragStart.bind(this);
-    this._onDrag = this._onDrag.bind(this);
-    this._onDragEnd = this._onDragEnd.bind(this);
+    this._onPanStart = this._onPanStart.bind(this);
+    this._onPan = this._onPan.bind(this);
+    this._onPinchStart = this._onPinchStart.bind(this);
+    this._onPinch = this._onPinch.bind(this);
     this._onWheel = this._onWheel.bind(this);
   }
 
@@ -133,62 +146,78 @@ export default class OrbitController extends Component {
     this.props.onChangeViewport(viewport);
   }
 
-  _onDragStart(evt) {
-    const {pageX, pageY} = evt;
-
-    this._dragStartPos = [pageX, pageY];
+  _onPanStart(evt) {
     // Rotation center should be the worldspace position at the center of the
     // the screen. If not found, use the last one.
-    this._dragRotateCenter = this._getLocationAtCenter() || this._dragRotateCenter;
+    this._dragStartCenter = this._getLocationAtCenter() || this._dragRotateCenter;
+    if (this._dragStartCenter) {
+      const viewport = OrbitController.getViewport(this.props);
+      this._dragStartCenterPos = viewport.project(this._dragStartCenter);
+    }
+    this._dragStartViewport = this.props;
   }
 
-  _onDrag(evt) {
-    if (this._dragStartPos) {
-      const {pageX, pageY} = evt;
-      const {width, height, translationX, translationY} = this.props;
-      const dx = pageX - this._dragStartPos[0];
-      const dy = pageY - this._dragStartPos[1];
+  _onPan(evt) {
+    const {deltaX, deltaY, srcEvent} = evt;
+    const {width, height} = this.props;
+    const {translationX, translationY} = this._dragStartViewport;
 
-      if (evt.shiftKey || evt.ctrlKey || evt.altKey || evt.metaKey) {
-        // Pan
-        this._onChangeViewport({
-          translationX: translationX + dx,
-          translationY: translationY - dy
-        });
-      } else {
-        // Rotate
-        const {rotationX, rotationY} = this.props;
-        const newRotationX = clamp(rotationX - dy / height * 180, -89.999, 89.999);
-        const newRotationY = (rotationY - dx / width * 180) % 360;
+    if (srcEvent.shiftKey || srcEvent.ctrlKey || srcEvent.altKey || srcEvent.metaKey) {
+      // Pan
+      this._onChangeViewport({
+        translationX: translationX + deltaX,
+        translationY: translationY - deltaY
+      });
+    } else {
+      // Rotate
+      const {rotationX, rotationY} = this._dragStartViewport;
+      const newRotationX = clamp(rotationX - deltaY / height * 180, -89.999, 89.999);
+      const newRotationY = (rotationY - deltaX / width * 180) % 360;
 
-        let newTranslationX = translationX;
-        let newTranslationY = translationY;
+      let newTranslationX = translationX;
+      let newTranslationY = translationY;
 
-        if (this._dragRotateCenter) {
-          // Keep rotation center at the center of the screen
-          const viewport = OrbitController.getViewport(this.props);
-          const newViewport = OrbitController.getViewport({...this.props, rotationX: newRotationX, rotationY: newRotationY});
-          const center = viewport.project(this._dragRotateCenter);
-          const newCenter = newViewport.project(this._dragRotateCenter);
+      if (this._dragStartCenter) {
+        // Keep rotation center at the center of the screen
+        const newViewport = OrbitController.getViewport({...this._dragStartViewport, rotationX: newRotationX, rotationY: newRotationY});
+        const newCenter = newViewport.project(this._dragStartCenter);
 
-          newTranslationX += center[0] - newCenter[0];
-          newTranslationY -= center[1] - newCenter[1];
-        }
-
-        this._onChangeViewport({
-          rotationX: newRotationX,
-          rotationY: newRotationY,
-          translationX: newTranslationX,
-          translationY: newTranslationY
-        });
+        newTranslationX += this._dragStartCenterPos[0] - newCenter[0];
+        newTranslationY -= this._dragStartCenterPos[1] - newCenter[1];
       }
 
-      this._dragStartPos = [pageX, pageY];
+      this._onChangeViewport({
+        rotationX: newRotationX,
+        rotationY: newRotationY,
+        translationX: newTranslationX,
+        translationY: newTranslationY
+      });
     }
   }
 
-  _onDragEnd() {
-    this._dragStartPos = null;
+  _onPinchStart(evt) {
+    this._pinchStartCenterPos = evt.center;
+    this._pinchStartViewport = this.props;
+    this._onChangeViewport({
+      zoom: 2
+    });
+  }
+
+  _onPinch(evt) {
+    const {zoom, minZoom, maxZoom, width, height, translationX, translationY} = this._pinchStartViewport;
+    const newZoom = clamp(zoom * evt.scale, minZoom, maxZoom);
+
+    // Zoom around the center position
+    const cx = this._pinchStartCenterPos.x - width / 2;
+    const cy = height / 2 - this._pinchStartCenterPos.y;
+    const newTranslationX = cx - (cx - translationX) * newZoom / zoom + evt.deltaX;
+    const newTranslationY = cy - (cy - translationY) * newZoom / zoom - evt.deltaY;
+
+    this._onChangeViewport({
+      zoom: newZoom,
+      translationX: newTranslationX,
+      translationY: newTranslationY
+    });
   }
 
   _onWheel(evt) {
@@ -208,13 +237,12 @@ export default class OrbitController extends Component {
       value = Math.floor(value / 4);
     }
 
-    const {pageX, pageY} = evt;
     const {zoom, minZoom, maxZoom, width, height, translationX, translationY} = this.props;
     const newZoom = clamp(zoom * Math.pow(1.01, -value), minZoom, maxZoom);
 
     // Zoom around the pointer position
-    const cx = pageX - width / 2;
-    const cy = height / 2 - pageY;
+    const cx = evt.pageX - width / 2;
+    const cy = height / 2 - evt.pageY;
     const newTranslationX = cx - (cx - translationX) * newZoom / zoom;
     const newTranslationY = cy - (cy - translationY) * newZoom / zoom;
 
@@ -247,16 +275,17 @@ export default class OrbitController extends Component {
 
   render() {
     return (
-      <div style={{position: 'relative', userSelect: 'none'}}
-        onMouseDown={this._onDragStart}
-        onMouseMove={this._onDrag}
-        onMouseLeave={this._onDragEnd}
-        onMouseUp={this._onDragEnd}
-        onWheel={this._onWheel} >
+      <Hammer options={hammerOptions}
+        onPanStart={this._onPanStart}
+        onPan={this._onPan}
+        onPinchStart={this._onPinchStart}
+        onPinch={this._onPinch}>
+        <div onWheel={this._onWheel} >
 
-        {this.props.children}
+          {this.props.evt || this.props.children}
 
-      </div>);
+        </div>
+      </Hammer>);
   }
 }
 

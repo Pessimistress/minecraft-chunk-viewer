@@ -21,7 +21,8 @@
     "luma.gl": "^3.0.0",
     "minecraft-region": "^0.3.1",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "react-hammerjs": "^0.5.0"
   },
   "devDependencies": {
     "babel-core": "^6.21.0",
