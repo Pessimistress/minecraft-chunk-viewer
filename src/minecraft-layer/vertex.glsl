@@ -119,7 +119,7 @@ vec4 formatTransform(vec4 t) {
     round(t.x * 255.0) / 16.0 - 4.0,
     round(t.y * 255.0) / 6.0 * PI,
     round(t.z * 255.0) / 16.0 - 1.0,
-    round(t.w * 255.0) / 16.0 - 1.0
+    round((1.0 - t.w) * 255.0) / 16.0
   );
 }
 

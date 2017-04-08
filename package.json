@@ -4,7 +4,7 @@
   "description": "A deck.gl experiment",
   "scripts": {
     "link": "(cd .. && rm -f node_modules && ln -s webpack/node_modules)",
-    "serve": "webpack-dev-server --progress --hot --port 3000 --open",
+    "serve": "webpack-dev-server --progress --hot --port 3000 --open --host 0.0.0.0",
     "start": "npm run link && npm run serve",
     "build-clean": "rm -rf dist && mkdir dist",
     "build-assets": "node scripts",

@@ -56,7 +56,7 @@ module.exports = function renderBlockDefs(data) {
       // pixels
       t['translate_' + key] + 16,
       // pixels
-      t['shrink_' + key] + 16
+      255 - t['shrink_' + key]
     ];
   }
 
