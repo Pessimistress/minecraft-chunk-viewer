@@ -154,7 +154,6 @@ class Root extends Component {
         getTemperature: getBlockTemperature,
         getBlockHumidity: getBlockHumidity,
         getIsBlockOpaque: isBlockOpaque,
-        regionBounds: selection.bounds,
         data: selection.data,
         sliceY: Math.floor(sliceY * selection.bounds.maxY + (1 - sliceY) * selection.bounds.minY),
         pickable: true,

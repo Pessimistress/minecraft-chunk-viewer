@@ -98,7 +98,7 @@ float getFaceIndex(vec3 normal_modelspace) {
   return round(index.x + index.y + index.z);
 }
 
-vec4 getBiomeColor(float faceIndex) {
+vec4 getBiomeColor() {
   // extreme altitude
   vec2 coords = vec2(1.0) - instanceBlockData.yz / 255.;
   return mix(
@@ -113,8 +113,8 @@ bool getVisibility(float faceIndex) {
   return mod(instanceVisibilities, b * 2.) >= b;
 }
 
-// (scale, rotate, translate, textureOrigin)
-vec4 formatTransform(vec4 t) {
+// (scale, rotate, translate, face offset)
+vec4 getTransform(vec4 t) {
   return vec4(
     round(t.x * 255.0) / 16.0 - 4.0,
     round(t.y * 255.0) / 6.0 * PI,
@@ -125,16 +125,16 @@ vec4 formatTransform(vec4 t) {
 
 void main(void) {
 
-  vec4 transformX = formatTransform(getBlockDefAt(6.0));
-  vec4 transformY = formatTransform(getBlockDefAt(7.0));
+  vec4 transformX = getTransform(getBlockDefAt(6.0));
+  vec4 transformY = getTransform(getBlockDefAt(7.0));
 
   vec3 blockScale = vec3(transformX[0], transformY[0], 1.0);
   mat3 blockRotation = getXYRotationMatrix(transformX[1], transformY[1]);
   vec3 blockTranslation = vec3(transformX[2], transformY[2], 0.0);
-  vec3 blockShrink = vec3(transformX[3], transformY[3], transformX[3]);
+  vec3 faceOffset = vec3(transformX[3], transformY[3], transformX[3]);
 
   vec3 position_modelspace = instancePositions +
-    blockRotation * (positions / 2. * blockScale - normals * blockShrink + blockTranslation);
+    blockRotation * (positions / 2. * blockScale - normals * faceOffset + blockTranslation);
 
   vec3 normal_modelspace = blockRotation * normals;
   vec2 texCoords_modelspace = texCoords * mix(
@@ -172,7 +172,7 @@ void main(void) {
   gl_Position = project_to_clipspace(vec4(position_modelspace, 1.));
 
   // calculate colors
-  vec4 biomeColor = mix(vec4(1.), getBiomeColor(faceIndex), textureSettings.z);
+  vec4 biomeColor = mix(vec4(1.), getBiomeColor(), textureSettings.z);
   vec3 lightWeight = getLightWeight(position_modelspace, normal_modelspace);
   float isGhosted = float(instancePositions.y > sliceY);
 

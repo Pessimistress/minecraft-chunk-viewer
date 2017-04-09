@@ -12,7 +12,8 @@ const defaultProps = {
   getBlockData: d => d.blockData,
   getTemperature: d => d.temperature,
   getHumidity: d => d.humidity,
-  getLighting: d => d.lighting
+  getLighting: d => d.lighting,
+  getIsBlockOpaque: (x, y, z) => false
 };
 
 export default class MinecraftLayer extends Layer {
