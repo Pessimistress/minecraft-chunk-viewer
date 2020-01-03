@@ -1,37 +1,54 @@
-import 'babel-polyfill';
-
 import React, {Component} from 'react';
 import {render} from 'react-dom';
-import DeckGL from 'deck.gl';
+import DeckGL, {
+  LightingEffect, 
+  AmbientLight,
+  DirectionalLight,
+  OrbitView
+} from 'deck.gl';
 import MinecraftLayer from './minecraft-layer';
-import OrbitController from './components/orbit-controller';
 import Minimap from './components/minimap';
 import SummaryPanel from './components/summary-panel';
 import About from './components/about';
 
-import {Matrix4} from 'luma.gl';
-import {request} from 'd3-request';
 import {loadMCA, readChunks, REGION_FILE_PATTERN,
-  getBlockNeighbors, getBlockTemperature, getBlockHumidity, isBlockOpaque} from './utils/mca-parser';
+  getBlockTemperature, getBlockHumidity, isBlockOpaque} from './utils/mca-parser';
 
 const sampleFile = 'r.5.13.mca';
+
+const INITIAL_VIEW_STATE = {
+  target: [0, 0, 0],
+  zoom: 0,
+  orbitAxis: 'Y',
+  rotationX: 30,
+  rotationOrbit: 30,
+  minZoom: -3,
+  maxZoom: 10
+};
+
+const LIGHTING_EFFECT = new LightingEffect({
+  ambient: new AmbientLight({
+    color: [255, 255, 255],
+    intensity: 0.6
+  }),
+  dir1: new DirectionalLight({
+    color: [255, 255, 255],
+    intensity: 1.0,
+    direction: [-3, -6, -1]
+  }),
+  dir2: new DirectionalLight({
+    color: [255, 255, 255],
+    intensity: 0.5,
+    direction: [3, -1, -0]
+  })
+});
 
 class Root extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      viewport: {
-        lookAt: [0, 0, 0],
-        rotationX: -30,
-        rotationY: 30,
-        fov: 10,
-        distance: 10,
-        minZoom: 0.1,
-        maxZoom: 1000,
-        width: 500,
-        height: 500
-      },
+      viewState: INITIAL_VIEW_STATE,
       sliceY: 1,
       regionInfo: null,
       selection: {
@@ -42,26 +59,10 @@ class Root extends Component {
     };
 
     // load example region file
-    request(`./samples/${sampleFile}`)
-      .responseType('arraybuffer')
-      .get(({response}) => this._onDataLoaded(sampleFile, response));
+    fetch(`./samples/${sampleFile}`)
+      .then(resp => resp.arrayBuffer())
+      .then(data => this._onDataLoaded(sampleFile, data));
 
-  }
-
-  componentDidMount() {
-    window.onresize = this._onResize;
-    this._onResize();
-  }
-
-  componentWillUnmount() {
-    window.onresize = null;
-  }
-
-  _onResize = () => {
-    this._onChangeViewport({
-      width: window.innerWidth,
-      height: window.innerHeight
-    });
   }
 
   _onDataLoaded = (filename, data) => {
@@ -88,13 +89,25 @@ class Root extends Component {
 
   _readChunks = chunks => {
     const selection = readChunks(chunks);
-    this.setState({selection});
-  }
+    const {bounds} = selection;
 
-  _onChangeViewport = viewport => {
-    this.setState({
-      viewport: {...this.state.viewport, ...viewport}
-    });
+    const scale = Math.min(window.innerWidth, window.innerHeight) / Math.max(
+      bounds.maxX - bounds.minX,
+      bounds.maxY - bounds.minY,
+      bounds.maxZ - bounds.minZ
+    );
+
+    const viewState = {
+      ...INITIAL_VIEW_STATE,
+      target: [
+        (bounds.minX + bounds.maxX) / 2,
+        (bounds.minY + bounds.maxY) / 2,
+        (bounds.minZ + bounds.maxZ) / 2
+      ],
+      zoom: Math.log2(scale)
+    };
+
+    this.setState({selection, viewState});
   }
 
   _onSliceY = e => {
@@ -136,6 +149,10 @@ class Root extends Component {
     evt.preventDefault();
   }
 
+  _onViewStateChange = ({viewState}) => {
+    this.setState({viewState});
+  }
+
   _onWebGLInitialized(gl) {
     gl.enable(gl.DEPTH_TEST);
     gl.depthFunc(gl.LEQUAL);
@@ -144,38 +161,34 @@ class Root extends Component {
 
   render() {
 
-    const {viewport, sliceY, selection, regionInfo, hoveredBlock} = this.state;
+    const {viewState, sliceY, selection, regionInfo, hoveredBlock} = this.state;
     const {infoPanel} = this.refs;
 
     const layers = [
       selection.data && new MinecraftLayer({
         id: 'minecraft-layer',
-        getNeighbors: getBlockNeighbors,
         getTemperature: getBlockTemperature,
         getBlockHumidity: getBlockHumidity,
         getIsBlockOpaque: isBlockOpaque,
         data: selection.data,
         sliceY: Math.floor(sliceY * selection.bounds.maxY + (1 - sliceY) * selection.bounds.minY),
         pickable: true,
+        autoHighlight: true,
+        highlightColor: [255, 255, 0, 128],
         onHover: this._onHoverBlock
       })
     ].filter(Boolean);
 
-    const perspectiveViewport = OrbitController.getViewport(viewport);
-
     return (
       <div onDragOver={this._preventDefault} onDrop={this._handleFileDrop} >
-        <OrbitController
-          {...viewport}
-          bounds={selection.bounds}
-          onChangeViewport={this._onChangeViewport} >
-          <DeckGL
-            width={viewport.width}
-            height={viewport.height}
-            viewport={perspectiveViewport}
-            onWebGLInitialized={ this._onWebGLInitialized }
-            layers={layers} />
-        </OrbitController>
+        <DeckGL
+          views={new OrbitView()}
+          viewState={viewState}
+          controller={true}
+          effects={[LIGHTING_EFFECT]}
+          onViewStateChange={ this._onViewStateChange }
+          onWebGLInitialized={ this._onWebGLInitialized }
+          layers={layers} />
 
         <About />
 
@@ -184,7 +197,7 @@ class Root extends Component {
           onChange={this._onSliceY} />
 
         <Minimap data={regionInfo} selection={selection.chunks}
-          direction={viewport.rotationY}
+          direction={viewState.rotationOrbit}
           onSelect={this._readChunks}/>
 
         <SummaryPanel data={selection} hoveredBlock={hoveredBlock} />

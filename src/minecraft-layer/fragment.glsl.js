@@ -17,6 +17,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+export default `
 #define SHADER_NAME minecraft-layer-fragment-shader
 
 #ifdef GL_ES
@@ -24,13 +25,10 @@ precision highp float;
 #endif
 
 uniform sampler2D atlasTexture;
-uniform float renderPickingBuffer;
 
 varying float isVisible;
 varying vec4 vColorScale;
-varying vec4 vColorOffset;
 varying vec2 vTextureCoords;
-varying vec4 vPickingColor;
 
 void main(void) {
   if (isVisible == 0.) {
@@ -42,6 +40,9 @@ void main(void) {
   if (color.a == 0.) {
     discard;
   }
+  geometry.uv = vTextureCoords;
 
-  gl_FragColor = mix(color * vColorScale + vColorOffset, vPickingColor, renderPickingBuffer);
+  gl_FragColor = color * vColorScale;
+  DECKGL_FILTER_COLOR(gl_FragColor, geometry);
 }
+`;

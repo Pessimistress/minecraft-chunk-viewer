@@ -1,0 +1,78 @@
+Arguments: 
+  /Users/missx/.nvm/versions/node/v10.16.3/bin/node /Users/missx/.yarn/bin/yarn.js
+
+PATH: 
+  /Users/missx/.yarn/bin:/Users/missx/.config/yarn/global/node_modules/.bin:/Users/missx/.nvm/versions/node/v10.16.3/bin:/Users/missx/.aw/pex_resources/scripts/binaries:/usr/local/sbin:/usr/local/bin:/Users/missx/bin:/usr/local/sbin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/opt/X11/bin:/Users/missx/gocode/bin:/Users/missx/bin
+
+Yarn version: 
+  1.17.3
+
+Node version: 
+  10.16.3
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@babel%2fenv: Not found
+      at Request.params.callback [as _callback] (/Users/missx/.yarn/lib/cli.js:66830:18)
+      at Request.self.callback (/Users/missx/.yarn/lib/cli.js:140464:22)
+      at Request.emit (events.js:198:13)
+      at Request.<anonymous> (/Users/missx/.yarn/lib/cli.js:141436:10)
+      at Request.emit (events.js:198:13)
+      at IncomingMessage.<anonymous> (/Users/missx/.yarn/lib/cli.js:141358:12)
+      at Object.onceWrapper (events.js:286:20)
+      at IncomingMessage.emit (events.js:203:15)
+      at endReadableNT (_stream_readable.js:1145:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
+
+npm manifest: 
+  {
+    "name": "minecraft-chunk-viewer",
+    "version": "0.0.0",
+    "description": "A deck.gl experiment",
+    "scripts": {
+      "link": "(cd .. && rm -f node_modules && ln -s webpack/node_modules)",
+      "serve": "webpack-dev-server --progress --hot --port 3000 --open --host 0.0.0.0",
+      "start": "npm run link && npm run serve",
+      "build-clean": "rm -rf dist && mkdir dist",
+      "build-assets": "node scripts",
+      "build-copy": "cp -r static/* dist",
+      "build-script": "webpack -p",
+      "build": "npm run build-clean && npm run build-assets && npm run build-script && npm run build-copy"
+    },
+    "author": "Xiaoji Chen <cxiaoji@gmail.com>",
+    "license": "MIT",
+    "dependencies": {
+      "@babel/polyfill": "^7.0.0",
+      "deck.gl": "^8.0.0",
+      "minecraft-region": "^0.3.1",
+      "react": "^16.3.0",
+      "react-dom": "^16.3.0",
+      "react-hammerjs": "^0.5.0"
+    },
+    "devDependencies": {
+      "@babel/core": "^7.0.0",
+      "@babel/env": "^7.0.0",
+      "@babel/preset-react": "^7.0.0",
+      "babel-loader": "^8.0.5",
+      "get-pixels": "^3.3.0",
+      "ndarray": "^1.0.18",
+      "save-pixels": "^2.3.4",
+      "webpack": "^4.20.2",
+      "webpack-cli": "^3.1.2",
+      "webpack-dev-server": "^3.1.1"
+    },
+    "babel": {
+      "presets": [
+        "env",
+        "react"
+      ]
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

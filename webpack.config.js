@@ -1,8 +1,9 @@
 const {resolve} = require('path');
 
-const prod = process.argv.indexOf('-p') !== -1;
+const prod = process.argv.NODE_ENV === 'production';
 
 module.exports = {
+  mode: prod ? 'production' : 'development',
 
   entry: [
     resolve('./src/app.js')
@@ -13,14 +14,7 @@ module.exports = {
     filename: 'bundle.js'
   },
 
-  devtool: prod ? '' : 'source-map',
-
-  resolve: {
-    alias: {
-      webworkify: 'webworkify-webpack-dropin',
-      'gl-matrix': resolve('./node_modules/gl-matrix/dist/gl-matrix.js')
-    }
-  },
+  devtool: prod ? false : 'source-map',
 
   devServer: {
     contentBase: './static',
@@ -30,19 +24,19 @@ module.exports = {
   },
 
   module: {
-
-    loaders: [{
-      test: /\.json$/,
-      loader: 'json-loader'
-    }, {
-      test: /\.js$/,
-      loader: 'babel-loader',
-      include: resolve('./src')
-    }, {
-      include: [resolve('./src')],
-      loader: 'transform-loader',
-      query: 'brfs-babel'
-    }]
+    rules: [
+      {
+        // Transpile ES6 to ES5 with babel
+        // Remove if your app does not use JSX or you don't need to support old browsers
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: [/node_modules/],
+        options: {
+          presets: ['@babel/preset-env', '@babel/preset-react'],
+          plugins: ['@babel/plugin-proposal-class-properties']
+        }
+      }
+    ]
   },
 
   node: {

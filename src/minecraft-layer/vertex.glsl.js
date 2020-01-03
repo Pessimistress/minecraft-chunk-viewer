@@ -17,6 +17,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
+export default `
 #define SHADER_NAME minecraft-layer-vertex-shader
 
 attribute vec3 positions;
@@ -24,6 +25,7 @@ attribute vec3 normals;
 attribute vec2 texCoords;
 
 attribute vec3 instancePositions;
+attribute vec3 instancePositions64Low;
 attribute float instanceBlockIds;
 attribute vec4 instanceBlockData;
 attribute float instanceVisibilities;
@@ -35,36 +37,10 @@ uniform vec2 blockDefsTextureDim;
 uniform vec2 atlasTextureDim;
 uniform sampler2D blockDefsTexture;
 uniform sampler2D biomeTexture;
-uniform vec3 selectedPickingColor;
-uniform float renderPickingBuffer;
 
 varying float isVisible;
 varying vec4 vColorScale;
-varying vec4 vColorOffset;
 varying vec2 vTextureCoords;
-varying vec4 vPickingColor;
-
-// lighting
-uniform float uAmbientLightCoefficient;
-uniform vec3 uPointLight1Location;
-uniform float uPointLight1Attenuation;
-uniform vec3 uPointLight2Location;
-uniform float uPointLight2Attenuation;
-
-vec3 getLightWeight(vec3 position, vec3 normal) {
-  vec3 position_viewspace = project_to_viewspace(vec4(position, 1.0)).xyz;
-  vec3 normal_viewspace = project_to_viewspace(vec4(normal, 0.0)).xyz;
-
-  vec3 ambient = vec3(uAmbientLightCoefficient + instanceBlockData.w / 15.0);
-
-  vec3 light1Direction = normalize(uPointLight1Location - position_viewspace);
-  vec3 light2Direction = normalize(uPointLight2Location - position_viewspace);
-
-  float diffuse1 = uPointLight1Attenuation * max(dot(normal_viewspace, light1Direction), 0.0);
-  float diffuse2 = uPointLight2Attenuation * max(dot(normal_viewspace, light2Direction), 0.0);
-
-  return min(ambient + diffuse1 + diffuse2, vec3(1.0));
-}
 
 mat3 getXYRotationMatrix(float radX, float radY) {
   float cx = cos(radX);
@@ -87,7 +63,6 @@ vec4 getBlockDefAt(float faceIndex) {
   vec2 coords = vec2(instanceBlockData.x * 8.0 + faceIndex, instanceBlockIds);
   coords += vec2(0.5);
   coords /= blockDefsTextureDim;
-  coords.y = 1.0 - coords.y;
 
   return texture2D(blockDefsTexture, coords);
 }
@@ -100,7 +75,9 @@ float getFaceIndex(vec3 normal_modelspace) {
 
 vec4 getBiomeColor() {
   // extreme altitude
-  vec2 coords = vec2(1.0) - instanceBlockData.yz / 255.;
+  vec2 coords = instanceBlockData.yz / 255.;
+  coords.x = 1.0 - coords.x;
+
   return mix(
     texture2D(biomeTexture, coords),
     vec4(1.5),
@@ -124,6 +101,7 @@ vec4 getTransform(vec4 t) {
 }
 
 void main(void) {
+  geometry.pickingColor = instancePickingColors;
 
   vec4 transformX = getTransform(getBlockDefAt(6.0));
   vec4 transformY = getTransform(getBlockDefAt(7.0));
@@ -133,7 +111,7 @@ void main(void) {
   vec3 blockTranslation = vec3(transformX[2], transformY[2], 0.0);
   vec3 faceOffset = vec3(transformX[3], transformY[3], transformX[3]);
 
-  vec3 position_modelspace = instancePositions +
+  vec3 position_modelspace =
     blockRotation * (positions / 2. * blockScale - normals * faceOffset + blockTranslation);
 
   vec3 normal_modelspace = blockRotation * normals;
@@ -159,7 +137,6 @@ void main(void) {
   );
 
   vTextureCoords = (textureFrame.xy + texCoords_modelspace * textureFrame.zw) / atlasTextureDim;
-  vTextureCoords.y = 1.0 - vTextureCoords.y;
 
   // discard empty faces and ones facing opaque blocks
   isVisible = float(
@@ -169,19 +146,21 @@ void main(void) {
   );
 
   // calculate position
-  gl_Position = project_to_clipspace(vec4(position_modelspace, 1.));
+  gl_Position = project_position_to_clipspace(instancePositions, instancePositions64Low, position_modelspace, geometry.position);
 
   // calculate colors
   vec4 biomeColor = mix(vec4(1.), getBiomeColor(), textureSettings.z);
-  vec3 lightWeight = getLightWeight(position_modelspace, normal_modelspace);
+  vec3 lightWeight = lighting_getLightColor(vec3(1.0), project_uCameraPosition, geometry.position.xyz, normal_modelspace);
+  lightWeight += instanceBlockData.w / 15.0;
+
   float isGhosted = float(instancePositions.y > sliceY);
 
-  isVisible = isVisible * (1.0 - renderPickingBuffer * isGhosted);
+  if (picking_uActive) {
+    isVisible *= 1.0 - isGhosted;
+  }
 
   vColorScale = vec4(lightWeight, mix(1.0, 0.1, isGhosted)) * biomeColor;
-  // highlight selected
-  vColorOffset = vec4(0.5, 0.5, 0.0, 0.5) * float(instancePickingColors == selectedPickingColor);
 
-  vPickingColor = vec4(instancePickingColors / 255., 1.0);
-
+  DECKGL_FILTER_COLOR(vColorScale, geometry);
 }
+`;

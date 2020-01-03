@@ -1,107 +1,105 @@
-import {Layer, assembleShaders} from 'deck.gl';
-import {GL, Model, CubeGeometry, loadTextures, Matrix4} from 'luma.gl';
-import {readFileSync} from 'fs';
-import {join} from 'path';
+import {Layer, gouraudLighting, picking, project32} from '@deck.gl/core';
+import {Model, CubeGeometry, Texture2D} from '@luma.gl/core';
+import GL from '@luma.gl/constants';
+import {loadImage} from '@loaders.gl/images';
+
+import vs from './vertex.glsl';
+import fs from './fragment.glsl';
+
+function loadTexture(gl, url) {
+  return loadImage(url).then(data => new Texture2D(gl, {
+    data,
+    parameters: {
+      [GL.TEXTURE_WRAP_S]: GL.CLAMP_TO_EDGE,
+      [GL.TEXTURE_WRAP_T]: GL.CLAMP_TO_EDGE,
+      [GL.TEXTURE_MIN_FILTER]: GL.NEAREST,
+      [GL.TEXTURE_MAG_FILTER]: GL.NEAREST
+    },
+    mipmaps: false
+  }));
+}
 
 const defaultProps = {
   // max Y level to show
   sliceY: 256,
   // accessors
-  getPosition: d => d.position,
-  getBlockId: d => d.blockId,
-  getBlockData: d => d.blockData,
-  getTemperature: d => d.temperature,
-  getHumidity: d => d.humidity,
-  getLighting: d => d.lighting,
-  getIsBlockOpaque: (x, y, z) => false
+  getPosition: {type: 'accessor', value: d => d.position},
+  getBlockId: {type: 'accessor', value: d => d.blockId},
+  getBlockData: {type: 'accessor', value: d => d.blockData},
+  getTemperature: {type: 'accessor', value: d => d.temperature},
+  getHumidity: {type: 'accessor', value: d => d.humidity},
+  getLighting: {type: 'accessor', value: d => d.lighting},
+  getIsBlockOpaque: {type: 'accessor', value: (x, y, z) => false},
+  // lighting
+  material: {}
 };
 
 export default class MinecraftLayer extends Layer {
 
   initializeState() {
-    const {attributeManager} = this.state;
     const {gl} = this.context;
 
-    attributeManager.addInstanced({
-      instancePositions: {size: 3, accessor: 'getPosition', update: this.calculateInstancePositions},
-      instanceBlockIds: {size: 1, accessor: 'getBlockId', update: this.calculateInstanceBlockIds},
+    this.getAttributeManager().addInstanced({
+      instancePositions: {size: 3, type: GL.DOUBLE, accessor: 'getPosition'},
+      instanceBlockIds: {size: 1, accessor: 'getBlockId'},
       instanceBlockData: {size: 4, type: gl.UNSIGNED_BYTE, accessor: ['getBlockData', 'getTemperature', 'getHumidity', 'getLighting'], update: this.calculateInstanceBlockData},
       instanceVisibilities: {size: 1, type: gl.UNSIGNED_BYTE, accessor: ['getPosition', 'getIsBlockOpaque'], update: this.calculateInstanceVisibilities},
-      instancePickingColors: {size: 3, type: gl.UNSIGNED_BYTE, update: this.calculateInstancePickingColors},
+      instancePickingColors: {
+        size: 3,
+        type: gl.UNSIGNED_BYTE,
+        accessor: (object, {index, target: value}) => this.encodePickingColor(object.index || index, value)
+      },
     });
 
-    this.setState({
-      model: this.getModel(gl)
-    });
+    this.setState({model: this.getModel(gl)});
 
-    this.setUniforms({
-      uAmbientLightCoefficient: 0.1,
-      uPointLight1Location: [0, 10, -10],
-      uPointLight1Attenuation: 0.7,
-      uPointLight2Location: [10, -10, -10],
-      uPointLight2Attenuation: 0.3
-    })
-
-    loadTextures(gl, {
-      urls: [
-        './data/blocks.png', 
-        './data/textures.png', 
-        './data/foliage.png'
-      ]
-    })
-    .then(([blockDefsTexture, atlasTexture, biomeTexture]) => {
-      this.setUniforms({
-        blockDefsTexture,
-        blockDefsTextureDim: [blockDefsTexture.width, blockDefsTexture.height],
-
-        atlasTexture,
-        atlasTextureDim: [atlasTexture.width, atlasTexture.height],
-        
-        biomeTexture
-      });
-    });
+    this.loadAssets();
   }
 
   getShaders() {
-    return {
-      vs: readFileSync(join(__dirname, './vertex.glsl'), 'utf8'),
-      fs: readFileSync(join(__dirname, './fragment.glsl'), 'utf8')
-    };
+    return {vs, fs, modules: [project32, picking, gouraudLighting]};
   }
 
   getModel(gl) {
-    const shaders = assembleShaders(gl, this.getShaders());
-
-    return new Model({
-      gl,
+    return new Model(gl, {
+      ...this.getShaders(),
       id: this.props.id,
-      vs: shaders.vs,
-      fs: shaders.fs,
       geometry: new CubeGeometry(),
       isInstanced: true
     });
   }
   
   draw({uniforms}) {
-    const {sliceY} = this.props;
-
-    this.state.model.render({
-      ...uniforms,
-      sliceY
-    });
+    if (this.state.texturesLoaded) {
+      const {sliceY} = this.props;
+      this.state.model.setUniforms({
+        ...uniforms,
+        sliceY
+      }).draw();
+    }
   }
 
-  calculateInstancePositions(attribute) {
-    const {data, getPosition} = this.props;
-    const {value} = attribute;
+  loadAssets() {
+    const {gl} = this.context;
+    const {model} = this.state;
 
-    let i = 0;
-    for (const object of data) {
-      const pos = getPosition(object);
-      value[i++] = pos[0];
-      value[i++] = pos[1];
-      value[i++] = pos[2];
-    }
+    Promise.all([
+      loadTexture(gl, './data/blocks.png'),
+      loadTexture(gl, './data/textures.png'),
+      loadTexture(gl, './data/foliage.png')
+    ]).then(([blockDefsTexture, atlasTexture, biomeTexture]) => {
+      model.setUniforms({
+        blockDefsTexture,
+        blockDefsTextureDim: [blockDefsTexture.width, blockDefsTexture.height],
+
+        atlasTexture,
+        atlasTextureDim: [atlasTexture.width, atlasTexture.height],
+
+        biomeTexture
+      });
+
+      this.setState({texturesLoaded: true})
+    });
   }
 
   calculateInstanceBlockData(attribute) {
@@ -114,16 +112,6 @@ export default class MinecraftLayer extends Layer {
       value[i++] = getTemperature(object) / 2 * 255;
       value[i++] = getHumidity(object) * 255;
       value[i++] = getLighting(object);
-    }
-  }
-
-  calculateInstanceBlockIds(attribute) {
-    const {data, getBlockId} = this.props;
-    const {value} = attribute;
-
-    let i = 0;
-    for (const object of data) {
-      value[i++] = getBlockId(object);
     }
   }
 
@@ -150,20 +138,6 @@ export default class MinecraftLayer extends Layer {
       }
     }
   }
-
-  calculateInstancePickingColors(attribute) {
-    const {data} = this.props;
-    const {value} = attribute;
-
-    let i = 0;
-    data.forEach((d, index) => {
-      const pickingColor = this.encodePickingColor(d.index || index);
-      value[i++] = pickingColor[0];
-      value[i++] = pickingColor[1];
-      value[i++] = pickingColor[2];
-    });
-  }
-
 }
 
 MinecraftLayer.layerName = 'MinecraftLayer';

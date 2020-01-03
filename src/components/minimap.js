@@ -90,7 +90,7 @@ export default class Minimap extends PureComponent {
         <div className="hover" style={hoverBoxStyle} />
 
         <div className="dir"
-          style={{transform: `rotate(${-direction - 90}deg)` }} >
+          style={{transform: `rotate(${direction - 90}deg)` }} >
           <div />
         </div>
       </div>
